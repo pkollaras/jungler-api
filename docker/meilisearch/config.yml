@@ -1,0 +1,5 @@
+meilisearch:
+  api_url: http://localhost:7700
+  api_key: 'MAfo2rp74pUW1fGr1QevsLgDc09slfPCOAhLHTphKhM'
+  insert_size: 1000
+  insert_interval: 10
