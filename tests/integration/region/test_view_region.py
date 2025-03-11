@@ -9,7 +9,9 @@ from region.factories import RegionFactory
 from region.models import Region
 from region.serializers import RegionSerializer
 
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 
 
@@ -170,8 +172,3 @@ class RegionViewSetTestCase(APITestCase):
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def tearDown(self) -> None:
-        Region.objects.all().delete()
-        Country.objects.all().delete()
-        super().tearDown()

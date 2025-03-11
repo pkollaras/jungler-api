@@ -5,8 +5,7 @@ from django.utils import timezone as tz
 from django.utils.translation import gettext_lazy as _
 from django_stubs_ext.db.models import TypedModelMeta
 
-from core.models import TimeStampMixinModel
-from core.models import UUIDModel
+from core.models import TimeStampMixinModel, UUIDModel
 
 
 class UnseenNotificationUserManager(models.Manager):
@@ -20,13 +19,13 @@ class NotificationUser(TimeStampMixinModel, UUIDModel):
         related_name="notification",
         on_delete=models.CASCADE,
     )
-    notification = models.ForeignKey("notification.Notification", related_name="user", on_delete=models.CASCADE)
+    notification = models.ForeignKey(
+        "notification.Notification",
+        related_name="user",
+        on_delete=models.CASCADE,
+    )
     seen = models.BooleanField(_("Seen"), default=False)
     seen_at = models.DateTimeField(_("Seen At"), null=True, blank=True)
-
-    def __unicode__(self):
-        status = "seen" if self.seen else "unseen"
-        return f"Notification {self.notification.id} for {self.user.full_name}: {status}"
 
     def __str__(self):
         status = "seen" if self.seen else "unseen"

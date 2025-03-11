@@ -78,8 +78,8 @@ services:
       - ./docker/meilisearch/.env
     volumes:
       - meilisearch:/meili_data
-#    ports:
-#      - "7700:7700"
+    ports:
+      - "7700:7700"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7700/health"]
       start_period: 10s

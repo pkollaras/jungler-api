@@ -1,17 +1,15 @@
 openapi: 3.0.3
 info:
-  title: Junglershop API
+  title: api
   version: 1.0.0
-  description: Junglershop API description
+  description: api description
 paths:
   /api/v1/auth/session/active_users_count:
     get:
-      operationId: api_v1_auth_session_active_users_count_retrieve
-      description: Returns the number of active users.
+      operationId: auth_session_active_users_count_retrieve
+      description: Returns the number of active users in the last hour.
       tags:
-      - api
-      security:
-      - {}
+      - auth
       responses:
         '200':
           content:
@@ -21,8 +19,8 @@ paths:
           description: ''
   /api/v1/auth/session/active_users_count{format}:
     get:
-      operationId: api_v1_auth_session_active_users_count_formatted_retrieve
-      description: Returns the number of active users.
+      operationId: auth_session_active_users_count_formatted_retrieve
+      description: Returns the number of active users in the last hour.
       parameters:
       - in: path
         name: format
@@ -32,9 +30,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
-      security:
-      - {}
+      - auth
       responses:
         '200':
           content:
@@ -44,7 +40,7 @@ paths:
           description: ''
   /api/v1/blog/author:
     get:
-      operationId: api_v1_blog_author_list
+      operationId: blog_author_list
       parameters:
       - in: query
         name: id
@@ -79,7 +75,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -90,9 +86,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogAuthorList'
           description: ''
     post:
-      operationId: api_v1_blog_author_create
+      operationId: blog_author_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -116,7 +112,7 @@ paths:
           description: ''
   /api/v1/blog/author{format}:
     get:
-      operationId: api_v1_blog_author_formatted_list
+      operationId: blog_author_formatted_list
       parameters:
       - in: path
         name: format
@@ -158,7 +154,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -169,7 +165,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogAuthorList'
           description: ''
     post:
-      operationId: api_v1_blog_author_formatted_create
+      operationId: blog_author_formatted_create
       parameters:
       - in: path
         name: format
@@ -179,7 +175,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -203,7 +199,7 @@ paths:
           description: ''
   /api/v1/blog/author/{id}:
     get:
-      operationId: api_v1_blog_author_retrieve
+      operationId: blog_author_retrieve
       parameters:
       - in: path
         name: id
@@ -211,7 +207,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -222,7 +218,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     put:
-      operationId: api_v1_blog_author_update
+      operationId: blog_author_update
       parameters:
       - in: path
         name: id
@@ -230,7 +226,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -253,7 +249,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     patch:
-      operationId: api_v1_blog_author_partial_update
+      operationId: blog_author_partial_update
       parameters:
       - in: path
         name: id
@@ -261,7 +257,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -283,7 +279,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     delete:
-      operationId: api_v1_blog_author_destroy
+      operationId: blog_author_destroy
       parameters:
       - in: path
         name: id
@@ -291,7 +287,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -299,7 +295,7 @@ paths:
           description: No response body
   /api/v1/blog/author/{id}{format}:
     get:
-      operationId: api_v1_blog_author_formatted_retrieve
+      operationId: blog_author_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -314,7 +310,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -325,7 +321,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     put:
-      operationId: api_v1_blog_author_formatted_update
+      operationId: blog_author_formatted_update
       parameters:
       - in: path
         name: format
@@ -340,7 +336,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -363,7 +359,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     patch:
-      operationId: api_v1_blog_author_formatted_partial_update
+      operationId: blog_author_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -378,7 +374,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -400,7 +396,7 @@ paths:
                 $ref: '#/components/schemas/BlogAuthor'
           description: ''
     delete:
-      operationId: api_v1_blog_author_formatted_destroy
+      operationId: blog_author_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -415,7 +411,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -423,7 +419,7 @@ paths:
           description: No response body
   /api/v1/blog/category:
     get:
-      operationId: api_v1_blog_category_list
+      operationId: blog_category_list
       parameters:
       - in: query
         name: id
@@ -454,7 +450,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -465,9 +461,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogCategoryList'
           description: ''
     post:
-      operationId: api_v1_blog_category_create
+      operationId: blog_category_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -491,7 +487,7 @@ paths:
           description: ''
   /api/v1/blog/category{format}:
     get:
-      operationId: api_v1_blog_category_formatted_list
+      operationId: blog_category_formatted_list
       parameters:
       - in: path
         name: format
@@ -529,7 +525,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -540,7 +536,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogCategoryList'
           description: ''
     post:
-      operationId: api_v1_blog_category_formatted_create
+      operationId: blog_category_formatted_create
       parameters:
       - in: path
         name: format
@@ -550,7 +546,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -574,7 +570,7 @@ paths:
           description: ''
   /api/v1/blog/category/{id}:
     get:
-      operationId: api_v1_blog_category_retrieve
+      operationId: blog_category_retrieve
       parameters:
       - in: path
         name: id
@@ -582,7 +578,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -593,7 +589,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     put:
-      operationId: api_v1_blog_category_update
+      operationId: blog_category_update
       parameters:
       - in: path
         name: id
@@ -601,7 +597,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -624,7 +620,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     patch:
-      operationId: api_v1_blog_category_partial_update
+      operationId: blog_category_partial_update
       parameters:
       - in: path
         name: id
@@ -632,7 +628,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -654,7 +650,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     delete:
-      operationId: api_v1_blog_category_destroy
+      operationId: blog_category_destroy
       parameters:
       - in: path
         name: id
@@ -662,7 +658,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -670,7 +666,7 @@ paths:
           description: No response body
   /api/v1/blog/category/{id}{format}:
     get:
-      operationId: api_v1_blog_category_formatted_retrieve
+      operationId: blog_category_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -685,7 +681,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -696,7 +692,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     put:
-      operationId: api_v1_blog_category_formatted_update
+      operationId: blog_category_formatted_update
       parameters:
       - in: path
         name: format
@@ -711,7 +707,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -734,7 +730,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     patch:
-      operationId: api_v1_blog_category_formatted_partial_update
+      operationId: blog_category_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -749,7 +745,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -771,7 +767,7 @@ paths:
                 $ref: '#/components/schemas/BlogCategory'
           description: ''
     delete:
-      operationId: api_v1_blog_category_formatted_destroy
+      operationId: blog_category_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -786,7 +782,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -794,7 +790,7 @@ paths:
           description: No response body
   /api/v1/blog/category/{id}/posts:
     get:
-      operationId: api_v1_blog_category_posts_retrieve
+      operationId: blog_category_posts_retrieve
       parameters:
       - in: path
         name: id
@@ -802,7 +798,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -814,7 +810,7 @@ paths:
           description: ''
   /api/v1/blog/category/{id}/posts{format}:
     get:
-      operationId: api_v1_blog_category_posts_formatted_retrieve
+      operationId: blog_category_posts_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -829,7 +825,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -841,7 +837,7 @@ paths:
           description: ''
   /api/v1/blog/comment:
     get:
-      operationId: api_v1_blog_comment_list
+      operationId: blog_comment_list
       parameters:
       - in: query
         name: id
@@ -888,7 +884,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -899,9 +895,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogCommentList'
           description: ''
     post:
-      operationId: api_v1_blog_comment_create
+      operationId: blog_comment_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -923,7 +919,7 @@ paths:
           description: ''
   /api/v1/blog/comment{format}:
     get:
-      operationId: api_v1_blog_comment_formatted_list
+      operationId: blog_comment_formatted_list
       parameters:
       - in: path
         name: format
@@ -977,7 +973,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -988,7 +984,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogCommentList'
           description: ''
     post:
-      operationId: api_v1_blog_comment_formatted_create
+      operationId: blog_comment_formatted_create
       parameters:
       - in: path
         name: format
@@ -998,7 +994,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1020,7 +1016,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}:
     get:
-      operationId: api_v1_blog_comment_retrieve
+      operationId: blog_comment_retrieve
       parameters:
       - in: path
         name: id
@@ -1028,7 +1024,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1039,7 +1035,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     put:
-      operationId: api_v1_blog_comment_update
+      operationId: blog_comment_update
       parameters:
       - in: path
         name: id
@@ -1047,7 +1043,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1068,7 +1064,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     patch:
-      operationId: api_v1_blog_comment_partial_update
+      operationId: blog_comment_partial_update
       parameters:
       - in: path
         name: id
@@ -1076,7 +1072,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1096,7 +1092,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     delete:
-      operationId: api_v1_blog_comment_destroy
+      operationId: blog_comment_destroy
       parameters:
       - in: path
         name: id
@@ -1104,13 +1100,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       responses:
         '204':
           description: No response body
   /api/v1/blog/comment/{id}{format}:
     get:
-      operationId: api_v1_blog_comment_formatted_retrieve
+      operationId: blog_comment_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -1125,7 +1121,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1136,7 +1132,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     put:
-      operationId: api_v1_blog_comment_formatted_update
+      operationId: blog_comment_formatted_update
       parameters:
       - in: path
         name: format
@@ -1151,7 +1147,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1172,7 +1168,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     patch:
-      operationId: api_v1_blog_comment_formatted_partial_update
+      operationId: blog_comment_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -1187,7 +1183,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1207,7 +1203,7 @@ paths:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
     delete:
-      operationId: api_v1_blog_comment_formatted_destroy
+      operationId: blog_comment_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -1222,13 +1218,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       responses:
         '204':
           description: No response body
   /api/v1/blog/comment/{id}/post:
     get:
-      operationId: api_v1_blog_comment_post_retrieve
+      operationId: blog_comment_post_retrieve
       parameters:
       - in: path
         name: id
@@ -1236,7 +1232,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1248,7 +1244,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}/post{format}:
     get:
-      operationId: api_v1_blog_comment_post_formatted_retrieve
+      operationId: blog_comment_post_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -1263,7 +1259,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1275,7 +1271,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}/replies:
     get:
-      operationId: api_v1_blog_comment_replies_retrieve
+      operationId: blog_comment_replies_retrieve
       parameters:
       - in: path
         name: id
@@ -1283,7 +1279,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1295,7 +1291,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}/replies{format}:
     get:
-      operationId: api_v1_blog_comment_replies_formatted_retrieve
+      operationId: blog_comment_replies_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -1310,7 +1306,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1322,7 +1318,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}/update_likes:
     post:
-      operationId: api_v1_blog_comment_update_likes_create
+      operationId: blog_comment_update_likes_create
       parameters:
       - in: path
         name: id
@@ -1330,7 +1326,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1354,7 +1350,7 @@ paths:
           description: ''
   /api/v1/blog/comment/{id}/update_likes{format}:
     post:
-      operationId: api_v1_blog_comment_update_likes_formatted_create
+      operationId: blog_comment_update_likes_formatted_create
       parameters:
       - in: path
         name: format
@@ -1369,7 +1365,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1393,9 +1389,9 @@ paths:
           description: ''
   /api/v1/blog/comment/liked_comments:
     post:
-      operationId: api_v1_blog_comment_liked_comments_create
+      operationId: blog_comment_liked_comments_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1419,7 +1415,7 @@ paths:
           description: ''
   /api/v1/blog/comment/liked_comments{format}:
     post:
-      operationId: api_v1_blog_comment_liked_comments_formatted_create
+      operationId: blog_comment_liked_comments_formatted_create
       parameters:
       - in: path
         name: format
@@ -1429,7 +1425,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1453,9 +1449,9 @@ paths:
           description: ''
   /api/v1/blog/comment/user_blog_comment:
     post:
-      operationId: api_v1_blog_comment_user_blog_comment_create
+      operationId: blog_comment_user_blog_comment_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1477,7 +1473,7 @@ paths:
           description: ''
   /api/v1/blog/comment/user_blog_comment{format}:
     post:
-      operationId: api_v1_blog_comment_user_blog_comment_formatted_create
+      operationId: blog_comment_user_blog_comment_formatted_create
       parameters:
       - in: path
         name: format
@@ -1487,7 +1483,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1509,12 +1505,16 @@ paths:
           description: ''
   /api/v1/blog/post:
     get:
-      operationId: api_v1_blog_post_list
+      operationId: blog_post_list
       parameters:
       - in: query
         name: author
         schema:
           type: integer
+      - in: query
+        name: authorEmail
+        schema:
+          type: string
       - in: query
         name: id
         schema:
@@ -1555,8 +1555,12 @@ paths:
             type: integer
         explode: true
         style: form
+      - in: query
+        name: title
+        schema:
+          type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1567,9 +1571,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogPostList'
           description: ''
     post:
-      operationId: api_v1_blog_post_create
+      operationId: blog_post_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1593,12 +1597,16 @@ paths:
           description: ''
   /api/v1/blog/post{format}:
     get:
-      operationId: api_v1_blog_post_formatted_list
+      operationId: blog_post_formatted_list
       parameters:
       - in: query
         name: author
         schema:
           type: integer
+      - in: query
+        name: authorEmail
+        schema:
+          type: string
       - in: path
         name: format
         schema:
@@ -1646,8 +1654,12 @@ paths:
             type: integer
         explode: true
         style: form
+      - in: query
+        name: title
+        schema:
+          type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1658,7 +1670,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogPostList'
           description: ''
     post:
-      operationId: api_v1_blog_post_formatted_create
+      operationId: blog_post_formatted_create
       parameters:
       - in: path
         name: format
@@ -1668,7 +1680,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1692,7 +1704,7 @@ paths:
           description: ''
   /api/v1/blog/post/{id}:
     get:
-      operationId: api_v1_blog_post_retrieve
+      operationId: blog_post_retrieve
       parameters:
       - in: path
         name: id
@@ -1700,7 +1712,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1711,7 +1723,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     put:
-      operationId: api_v1_blog_post_update
+      operationId: blog_post_update
       parameters:
       - in: path
         name: id
@@ -1719,7 +1731,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1742,7 +1754,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     patch:
-      operationId: api_v1_blog_post_partial_update
+      operationId: blog_post_partial_update
       parameters:
       - in: path
         name: id
@@ -1750,7 +1762,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1772,7 +1784,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     delete:
-      operationId: api_v1_blog_post_destroy
+      operationId: blog_post_destroy
       parameters:
       - in: path
         name: id
@@ -1780,7 +1792,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1788,7 +1800,7 @@ paths:
           description: No response body
   /api/v1/blog/post/{id}{format}:
     get:
-      operationId: api_v1_blog_post_formatted_retrieve
+      operationId: blog_post_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -1803,7 +1815,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1814,7 +1826,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     put:
-      operationId: api_v1_blog_post_formatted_update
+      operationId: blog_post_formatted_update
       parameters:
       - in: path
         name: format
@@ -1829,7 +1841,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1852,7 +1864,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     patch:
-      operationId: api_v1_blog_post_formatted_partial_update
+      operationId: blog_post_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -1867,7 +1879,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1889,7 +1901,7 @@ paths:
                 $ref: '#/components/schemas/BlogPost'
           description: ''
     delete:
-      operationId: api_v1_blog_post_formatted_destroy
+      operationId: blog_post_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -1904,7 +1916,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1912,7 +1924,7 @@ paths:
           description: No response body
   /api/v1/blog/post/{id}/comments:
     get:
-      operationId: api_v1_blog_post_comments_retrieve
+      operationId: blog_post_comments_retrieve
       parameters:
       - in: path
         name: id
@@ -1920,7 +1932,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1932,7 +1944,7 @@ paths:
           description: ''
   /api/v1/blog/post/{id}/comments{format}:
     get:
-      operationId: api_v1_blog_post_comments_formatted_retrieve
+      operationId: blog_post_comments_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -1947,7 +1959,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -1957,9 +1969,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/BlogComment'
           description: ''
-  /api/v1/blog/post/{id}/update_likes:
-    post:
-      operationId: api_v1_blog_post_update_likes_create
+  /api/v1/blog/post/{id}/related_posts:
+    get:
+      operationId: blog_post_related_posts_retrieve
       parameters:
       - in: path
         name: id
@@ -1967,7 +1979,54 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+  /api/v1/blog/post/{id}/related_posts{format}:
+    get:
+      operationId: blog_post_related_posts_formatted_retrieve
+      parameters:
+      - in: path
+        name: format
+        schema:
+          type: string
+          enum:
+          - .json
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - blog
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPost'
+          description: ''
+  /api/v1/blog/post/{id}/update_likes:
+    post:
+      operationId: blog_post_update_likes_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1991,7 +2050,7 @@ paths:
           description: ''
   /api/v1/blog/post/{id}/update_likes{format}:
     post:
-      operationId: api_v1_blog_post_update_likes_formatted_create
+      operationId: blog_post_update_likes_formatted_create
       parameters:
       - in: path
         name: format
@@ -2006,7 +2065,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2030,7 +2089,7 @@ paths:
           description: ''
   /api/v1/blog/post/{id}/update_view_count:
     post:
-      operationId: api_v1_blog_post_update_view_count_create
+      operationId: blog_post_update_view_count_create
       parameters:
       - in: path
         name: id
@@ -2038,7 +2097,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2062,7 +2121,7 @@ paths:
           description: ''
   /api/v1/blog/post/{id}/update_view_count{format}:
     post:
-      operationId: api_v1_blog_post_update_view_count_formatted_create
+      operationId: blog_post_update_view_count_formatted_create
       parameters:
       - in: path
         name: format
@@ -2077,7 +2136,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2101,9 +2160,9 @@ paths:
           description: ''
   /api/v1/blog/post/liked_posts:
     post:
-      operationId: api_v1_blog_post_liked_posts_create
+      operationId: blog_post_liked_posts_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2127,7 +2186,7 @@ paths:
           description: ''
   /api/v1/blog/post/liked_posts{format}:
     post:
-      operationId: api_v1_blog_post_liked_posts_formatted_create
+      operationId: blog_post_liked_posts_formatted_create
       parameters:
       - in: path
         name: format
@@ -2137,7 +2196,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2161,7 +2220,7 @@ paths:
           description: ''
   /api/v1/blog/tag:
     get:
-      operationId: api_v1_blog_tag_list
+      operationId: blog_tag_list
       parameters:
       - in: query
         name: active
@@ -2196,7 +2255,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2207,9 +2266,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogTagList'
           description: ''
     post:
-      operationId: api_v1_blog_tag_create
+      operationId: blog_tag_create
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2233,7 +2292,7 @@ paths:
           description: ''
   /api/v1/blog/tag{format}:
     get:
-      operationId: api_v1_blog_tag_formatted_list
+      operationId: blog_tag_formatted_list
       parameters:
       - in: query
         name: active
@@ -2275,7 +2334,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2286,7 +2345,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedBlogTagList'
           description: ''
     post:
-      operationId: api_v1_blog_tag_formatted_create
+      operationId: blog_tag_formatted_create
       parameters:
       - in: path
         name: format
@@ -2296,7 +2355,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2320,7 +2379,7 @@ paths:
           description: ''
   /api/v1/blog/tag/{id}:
     get:
-      operationId: api_v1_blog_tag_retrieve
+      operationId: blog_tag_retrieve
       parameters:
       - in: path
         name: id
@@ -2328,7 +2387,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2339,7 +2398,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     put:
-      operationId: api_v1_blog_tag_update
+      operationId: blog_tag_update
       parameters:
       - in: path
         name: id
@@ -2347,7 +2406,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2370,7 +2429,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     patch:
-      operationId: api_v1_blog_tag_partial_update
+      operationId: blog_tag_partial_update
       parameters:
       - in: path
         name: id
@@ -2378,7 +2437,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2400,7 +2459,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     delete:
-      operationId: api_v1_blog_tag_destroy
+      operationId: blog_tag_destroy
       parameters:
       - in: path
         name: id
@@ -2408,7 +2467,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2416,7 +2475,7 @@ paths:
           description: No response body
   /api/v1/blog/tag/{id}{format}:
     get:
-      operationId: api_v1_blog_tag_formatted_retrieve
+      operationId: blog_tag_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -2431,7 +2490,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2442,7 +2501,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     put:
-      operationId: api_v1_blog_tag_formatted_update
+      operationId: blog_tag_formatted_update
       parameters:
       - in: path
         name: format
@@ -2457,7 +2516,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2480,7 +2539,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     patch:
-      operationId: api_v1_blog_tag_formatted_partial_update
+      operationId: blog_tag_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -2495,7 +2554,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2517,7 +2576,7 @@ paths:
                 $ref: '#/components/schemas/BlogTag'
           description: ''
     delete:
-      operationId: api_v1_blog_tag_formatted_destroy
+      operationId: blog_tag_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -2532,7 +2591,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - blog
       security:
       - {}
       responses:
@@ -2540,9 +2599,9 @@ paths:
           description: No response body
   /api/v1/cart:
     get:
-      operationId: api_v1_cart_retrieve
+      operationId: cart_retrieve
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2553,9 +2612,9 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     put:
-      operationId: api_v1_cart_update
+      operationId: cart_update
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2577,9 +2636,9 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     patch:
-      operationId: api_v1_cart_partial_update
+      operationId: cart_partial_update
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2601,9 +2660,9 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     delete:
-      operationId: api_v1_cart_destroy
+      operationId: cart_destroy
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2611,7 +2670,7 @@ paths:
           description: No response body
   /api/v1/cart{format}:
     get:
-      operationId: api_v1_cart_formatted_retrieve
+      operationId: cart_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -2621,7 +2680,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2632,7 +2691,7 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     put:
-      operationId: api_v1_cart_formatted_update
+      operationId: cart_formatted_update
       parameters:
       - in: path
         name: format
@@ -2642,7 +2701,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2664,7 +2723,7 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     patch:
-      operationId: api_v1_cart_formatted_partial_update
+      operationId: cart_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -2674,7 +2733,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2696,7 +2755,7 @@ paths:
                 $ref: '#/components/schemas/Cart'
           description: ''
     delete:
-      operationId: api_v1_cart_formatted_destroy
+      operationId: cart_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -2706,7 +2765,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2714,7 +2773,7 @@ paths:
           description: No response body
   /api/v1/cart/item:
     get:
-      operationId: api_v1_cart_item_list
+      operationId: cart_item_list
       parameters:
       - in: query
         name: cart
@@ -2745,7 +2804,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2756,9 +2815,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedCartItemList'
           description: ''
     post:
-      operationId: api_v1_cart_item_create
+      operationId: cart_item_create
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2782,7 +2841,7 @@ paths:
           description: ''
   /api/v1/cart/item{format}:
     get:
-      operationId: api_v1_cart_item_formatted_list
+      operationId: cart_item_formatted_list
       parameters:
       - in: query
         name: cart
@@ -2820,7 +2879,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2831,7 +2890,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedCartItemList'
           description: ''
     post:
-      operationId: api_v1_cart_item_formatted_create
+      operationId: cart_item_formatted_create
       parameters:
       - in: path
         name: format
@@ -2841,7 +2900,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2865,7 +2924,7 @@ paths:
           description: ''
   /api/v1/cart/item/{id}:
     get:
-      operationId: api_v1_cart_item_retrieve
+      operationId: cart_item_retrieve
       parameters:
       - in: path
         name: id
@@ -2873,7 +2932,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2884,7 +2943,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     put:
-      operationId: api_v1_cart_item_update
+      operationId: cart_item_update
       parameters:
       - in: path
         name: id
@@ -2892,7 +2951,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2914,7 +2973,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     patch:
-      operationId: api_v1_cart_item_partial_update
+      operationId: cart_item_partial_update
       parameters:
       - in: path
         name: id
@@ -2922,7 +2981,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -2944,7 +3003,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     delete:
-      operationId: api_v1_cart_item_destroy
+      operationId: cart_item_destroy
       parameters:
       - in: path
         name: id
@@ -2952,7 +3011,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2960,7 +3019,7 @@ paths:
           description: No response body
   /api/v1/cart/item/{id}{format}:
     get:
-      operationId: api_v1_cart_item_formatted_retrieve
+      operationId: cart_item_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -2975,7 +3034,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -2986,7 +3045,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     put:
-      operationId: api_v1_cart_item_formatted_update
+      operationId: cart_item_formatted_update
       parameters:
       - in: path
         name: format
@@ -3001,7 +3060,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3023,7 +3082,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     patch:
-      operationId: api_v1_cart_item_formatted_partial_update
+      operationId: cart_item_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -3038,7 +3097,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3060,7 +3119,7 @@ paths:
                 $ref: '#/components/schemas/CartItem'
           description: ''
     delete:
-      operationId: api_v1_cart_item_formatted_destroy
+      operationId: cart_item_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -3075,7 +3134,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - cart
       security:
       - {}
       responses:
@@ -3083,9 +3142,9 @@ paths:
           description: No response body
   /api/v1/checkout:
     post:
-      operationId: api_v1_checkout_create
+      operationId: checkout_create
       tags:
-      - api
+      - checkout
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3109,9 +3168,9 @@ paths:
           description: ''
   /api/v1/contact:
     post:
-      operationId: api_v1_contact_create
+      operationId: contact_create
       tags:
-      - api
+      - contact
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3135,7 +3194,7 @@ paths:
           description: ''
   /api/v1/country:
     get:
-      operationId: api_v1_country_list
+      operationId: country_list
       parameters:
       - in: query
         name: alpha2
@@ -3182,7 +3241,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3193,9 +3252,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
     post:
-      operationId: api_v1_country_create
+      operationId: country_create
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3219,7 +3278,7 @@ paths:
           description: ''
   /api/v1/country{format}:
     get:
-      operationId: api_v1_country_formatted_list
+      operationId: country_formatted_list
       parameters:
       - in: query
         name: alpha2
@@ -3273,7 +3332,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3284,7 +3343,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedCountryList'
           description: ''
     post:
-      operationId: api_v1_country_formatted_create
+      operationId: country_formatted_create
       parameters:
       - in: path
         name: format
@@ -3294,7 +3353,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3318,7 +3377,7 @@ paths:
           description: ''
   /api/v1/country/{alpha_2}:
     get:
-      operationId: api_v1_country_retrieve
+      operationId: country_retrieve
       parameters:
       - in: path
         name: alpha2
@@ -3328,7 +3387,7 @@ paths:
         description: A unique value identifying this Country.
         required: true
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3339,7 +3398,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     put:
-      operationId: api_v1_country_update
+      operationId: country_update
       parameters:
       - in: path
         name: alpha2
@@ -3349,7 +3408,7 @@ paths:
         description: A unique value identifying this Country.
         required: true
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3372,7 +3431,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     patch:
-      operationId: api_v1_country_partial_update
+      operationId: country_partial_update
       parameters:
       - in: path
         name: alpha2
@@ -3382,7 +3441,7 @@ paths:
         description: A unique value identifying this Country.
         required: true
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3404,7 +3463,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     delete:
-      operationId: api_v1_country_destroy
+      operationId: country_destroy
       parameters:
       - in: path
         name: alpha2
@@ -3414,7 +3473,7 @@ paths:
         description: A unique value identifying this Country.
         required: true
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3422,7 +3481,7 @@ paths:
           description: No response body
   /api/v1/country/{alpha_2}{format}:
     get:
-      operationId: api_v1_country_formatted_retrieve
+      operationId: country_formatted_retrieve
       parameters:
       - in: path
         name: alpha2
@@ -3439,7 +3498,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3450,7 +3509,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     put:
-      operationId: api_v1_country_formatted_update
+      operationId: country_formatted_update
       parameters:
       - in: path
         name: alpha2
@@ -3467,7 +3526,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3490,7 +3549,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     patch:
-      operationId: api_v1_country_formatted_partial_update
+      operationId: country_formatted_partial_update
       parameters:
       - in: path
         name: alpha2
@@ -3507,7 +3566,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - country
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3529,7 +3588,7 @@ paths:
                 $ref: '#/components/schemas/Country'
           description: ''
     delete:
-      operationId: api_v1_country_formatted_destroy
+      operationId: country_formatted_destroy
       parameters:
       - in: path
         name: alpha2
@@ -3546,7 +3605,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - country
       security:
       - {}
       responses:
@@ -3554,20 +3613,25 @@ paths:
           description: No response body
   /api/v1/health:
     get:
-      operationId: api_v1_health_retrieve
+      operationId: health_retrieve
+      description: Check the health status of database, Redis, and Celery
       tags:
-      - api
+      - health
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+          description: ''
   /api/v1/notification/ids:
     post:
-      operationId: api_v1_notification_ids_create
+      operationId: notification_ids_create
       description: Returns the notifications for a list of ids.
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3581,7 +3645,7 @@ paths:
           description: ''
   /api/v1/notification/ids{format}:
     post:
-      operationId: api_v1_notification_ids_formatted_create
+      operationId: notification_ids_formatted_create
       description: Returns the notifications for a list of ids.
       parameters:
       - in: path
@@ -3592,7 +3656,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3606,7 +3670,7 @@ paths:
           description: ''
   /api/v1/notification/user/{id}:
     get:
-      operationId: api_v1_notification_user_retrieve
+      operationId: notification_user_retrieve
       parameters:
       - in: path
         name: id
@@ -3614,7 +3678,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3625,7 +3689,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     put:
-      operationId: api_v1_notification_user_update
+      operationId: notification_user_update
       parameters:
       - in: path
         name: id
@@ -3633,7 +3697,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3656,7 +3720,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     patch:
-      operationId: api_v1_notification_user_partial_update
+      operationId: notification_user_partial_update
       parameters:
       - in: path
         name: id
@@ -3664,7 +3728,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3686,7 +3750,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     delete:
-      operationId: api_v1_notification_user_destroy
+      operationId: notification_user_destroy
       parameters:
       - in: path
         name: id
@@ -3694,7 +3758,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3702,7 +3766,7 @@ paths:
           description: No response body
   /api/v1/notification/user/{id}{format}:
     get:
-      operationId: api_v1_notification_user_formatted_retrieve
+      operationId: notification_user_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -3717,7 +3781,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3728,7 +3792,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     put:
-      operationId: api_v1_notification_user_formatted_update
+      operationId: notification_user_formatted_update
       parameters:
       - in: path
         name: format
@@ -3743,7 +3807,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3766,7 +3830,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     patch:
-      operationId: api_v1_notification_user_formatted_partial_update
+      operationId: notification_user_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -3781,7 +3845,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3803,7 +3867,7 @@ paths:
                 $ref: '#/components/schemas/NotificationUser'
           description: ''
     delete:
-      operationId: api_v1_notification_user_formatted_destroy
+      operationId: notification_user_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -3818,7 +3882,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -3826,9 +3890,9 @@ paths:
           description: No response body
   /api/v1/notification/user/mark_all_as_seen:
     post:
-      operationId: api_v1_notification_user_mark_all_as_seen_create
+      operationId: notification_user_mark_all_as_seen_create
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3852,7 +3916,7 @@ paths:
           description: ''
   /api/v1/notification/user/mark_all_as_seen{format}:
     post:
-      operationId: api_v1_notification_user_mark_all_as_seen_formatted_create
+      operationId: notification_user_mark_all_as_seen_formatted_create
       parameters:
       - in: path
         name: format
@@ -3862,7 +3926,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3886,9 +3950,9 @@ paths:
           description: ''
   /api/v1/notification/user/mark_all_as_unseen:
     post:
-      operationId: api_v1_notification_user_mark_all_as_unseen_create
+      operationId: notification_user_mark_all_as_unseen_create
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3912,7 +3976,7 @@ paths:
           description: ''
   /api/v1/notification/user/mark_all_as_unseen{format}:
     post:
-      operationId: api_v1_notification_user_mark_all_as_unseen_formatted_create
+      operationId: notification_user_mark_all_as_unseen_formatted_create
       parameters:
       - in: path
         name: format
@@ -3922,7 +3986,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3946,9 +4010,9 @@ paths:
           description: ''
   /api/v1/notification/user/mark_as_seen:
     post:
-      operationId: api_v1_notification_user_mark_as_seen_create
+      operationId: notification_user_mark_as_seen_create
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -3972,7 +4036,7 @@ paths:
           description: ''
   /api/v1/notification/user/mark_as_seen{format}:
     post:
-      operationId: api_v1_notification_user_mark_as_seen_formatted_create
+      operationId: notification_user_mark_as_seen_formatted_create
       parameters:
       - in: path
         name: format
@@ -3982,7 +4046,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4006,9 +4070,9 @@ paths:
           description: ''
   /api/v1/notification/user/mark_as_unseen:
     post:
-      operationId: api_v1_notification_user_mark_as_unseen_create
+      operationId: notification_user_mark_as_unseen_create
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4032,7 +4096,7 @@ paths:
           description: ''
   /api/v1/notification/user/mark_as_unseen{format}:
     post:
-      operationId: api_v1_notification_user_mark_as_unseen_formatted_create
+      operationId: notification_user_mark_as_unseen_formatted_create
       parameters:
       - in: path
         name: format
@@ -4042,7 +4106,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4066,9 +4130,9 @@ paths:
           description: ''
   /api/v1/notification/user/unseen_count:
     get:
-      operationId: api_v1_notification_user_unseen_count_retrieve
+      operationId: notification_user_unseen_count_retrieve
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -4080,7 +4144,7 @@ paths:
           description: ''
   /api/v1/notification/user/unseen_count{format}:
     get:
-      operationId: api_v1_notification_user_unseen_count_formatted_retrieve
+      operationId: notification_user_unseen_count_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -4090,7 +4154,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - notification
       security:
       - {}
       responses:
@@ -4102,7 +4166,7 @@ paths:
           description: ''
   /api/v1/order:
     get:
-      operationId: api_v1_order_list
+      operationId: order_list
       parameters:
       - name: ordering
         required: false
@@ -4148,7 +4212,7 @@ paths:
           type: integer
           nullable: true
       tags:
-      - api
+      - order
       security:
       - {}
       responses:
@@ -4159,9 +4223,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedOrderList'
           description: ''
     post:
-      operationId: api_v1_order_create
+      operationId: order_create
       tags:
-      - api
+      - order
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4185,7 +4249,7 @@ paths:
           description: ''
   /api/v1/order/{id}:
     get:
-      operationId: api_v1_order_retrieve
+      operationId: order_retrieve
       parameters:
       - in: path
         name: id
@@ -4193,7 +4257,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - order
       security:
       - {}
       responses:
@@ -4204,7 +4268,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
     put:
-      operationId: api_v1_order_update
+      operationId: order_update
       parameters:
       - in: path
         name: id
@@ -4212,7 +4276,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - order
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4235,7 +4299,7 @@ paths:
                 $ref: '#/components/schemas/OrderCreateUpdate'
           description: ''
     patch:
-      operationId: api_v1_order_partial_update
+      operationId: order_partial_update
       parameters:
       - in: path
         name: id
@@ -4243,7 +4307,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - order
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4265,7 +4329,7 @@ paths:
                 $ref: '#/components/schemas/OrderCreateUpdate'
           description: ''
     delete:
-      operationId: api_v1_order_destroy
+      operationId: order_destroy
       parameters:
       - in: path
         name: id
@@ -4273,7 +4337,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - order
       security:
       - {}
       responses:
@@ -4281,7 +4345,7 @@ paths:
           description: No response body
   /api/v1/order/uuid/{uuid}:
     get:
-      operationId: api_v1_order_uuid_retrieve
+      operationId: order_uuid_retrieve
       parameters:
       - in: path
         name: uuid
@@ -4290,7 +4354,7 @@ paths:
           format: uuid
         required: true
       tags:
-      - api
+      - order
       security:
       - {}
       responses:
@@ -4302,7 +4366,7 @@ paths:
           description: ''
   /api/v1/pay_way:
     get:
-      operationId: api_v1_pay_way_list
+      operationId: pay_way_list
       parameters:
       - in: query
         name: active
@@ -4341,7 +4405,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - pay_way
       security:
       - {}
       responses:
@@ -4352,9 +4416,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedPayWayList'
           description: ''
     post:
-      operationId: api_v1_pay_way_create
+      operationId: pay_way_create
       tags:
-      - api
+      - pay_way
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4378,7 +4442,7 @@ paths:
           description: ''
   /api/v1/pay_way/{id}:
     get:
-      operationId: api_v1_pay_way_retrieve
+      operationId: pay_way_retrieve
       parameters:
       - in: path
         name: id
@@ -4386,7 +4450,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - pay_way
       security:
       - {}
       responses:
@@ -4397,7 +4461,7 @@ paths:
                 $ref: '#/components/schemas/PayWay'
           description: ''
     put:
-      operationId: api_v1_pay_way_update
+      operationId: pay_way_update
       parameters:
       - in: path
         name: id
@@ -4405,7 +4469,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - pay_way
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4428,7 +4492,7 @@ paths:
                 $ref: '#/components/schemas/PayWay'
           description: ''
     patch:
-      operationId: api_v1_pay_way_partial_update
+      operationId: pay_way_partial_update
       parameters:
       - in: path
         name: id
@@ -4436,7 +4500,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - pay_way
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4458,7 +4522,7 @@ paths:
                 $ref: '#/components/schemas/PayWay'
           description: ''
     delete:
-      operationId: api_v1_pay_way_destroy
+      operationId: pay_way_destroy
       parameters:
       - in: path
         name: id
@@ -4466,7 +4530,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - pay_way
       security:
       - {}
       responses:
@@ -4474,7 +4538,7 @@ paths:
           description: No response body
   /api/v1/product:
     get:
-      operationId: api_v1_product_list
+      operationId: product_list
       parameters:
       - in: query
         name: category
@@ -4513,7 +4577,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4524,9 +4588,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductList'
           description: ''
     post:
-      operationId: api_v1_product_create
+      operationId: product_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4550,7 +4614,7 @@ paths:
           description: ''
   /api/v1/product{format}:
     get:
-      operationId: api_v1_product_formatted_list
+      operationId: product_formatted_list
       parameters:
       - in: query
         name: category
@@ -4596,7 +4660,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4607,7 +4671,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductList'
           description: ''
     post:
-      operationId: api_v1_product_formatted_create
+      operationId: product_formatted_create
       parameters:
       - in: path
         name: format
@@ -4617,7 +4681,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4641,7 +4705,7 @@ paths:
           description: ''
   /api/v1/product/{id}:
     get:
-      operationId: api_v1_product_retrieve
+      operationId: product_retrieve
       parameters:
       - in: path
         name: id
@@ -4649,7 +4713,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4660,7 +4724,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     put:
-      operationId: api_v1_product_update
+      operationId: product_update
       parameters:
       - in: path
         name: id
@@ -4668,7 +4732,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4691,7 +4755,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     patch:
-      operationId: api_v1_product_partial_update
+      operationId: product_partial_update
       parameters:
       - in: path
         name: id
@@ -4699,7 +4763,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4721,7 +4785,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     delete:
-      operationId: api_v1_product_destroy
+      operationId: product_destroy
       parameters:
       - in: path
         name: id
@@ -4729,7 +4793,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4737,7 +4801,7 @@ paths:
           description: No response body
   /api/v1/product/{id}{format}:
     get:
-      operationId: api_v1_product_formatted_retrieve
+      operationId: product_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -4752,7 +4816,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4763,7 +4827,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     put:
-      operationId: api_v1_product_formatted_update
+      operationId: product_formatted_update
       parameters:
       - in: path
         name: format
@@ -4778,7 +4842,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4801,7 +4865,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     patch:
-      operationId: api_v1_product_formatted_partial_update
+      operationId: product_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -4816,7 +4880,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -4838,7 +4902,7 @@ paths:
                 $ref: '#/components/schemas/Product'
           description: ''
     delete:
-      operationId: api_v1_product_formatted_destroy
+      operationId: product_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -4853,7 +4917,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4861,7 +4925,7 @@ paths:
           description: No response body
   /api/v1/product/{id}/images:
     get:
-      operationId: api_v1_product_images_retrieve
+      operationId: product_images_retrieve
       parameters:
       - in: path
         name: id
@@ -4869,7 +4933,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4881,7 +4945,7 @@ paths:
           description: ''
   /api/v1/product/{id}/images{format}:
     get:
-      operationId: api_v1_product_images_formatted_retrieve
+      operationId: product_images_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -4896,7 +4960,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4908,7 +4972,7 @@ paths:
           description: ''
   /api/v1/product/{id}/reviews:
     get:
-      operationId: api_v1_product_reviews_retrieve
+      operationId: product_reviews_retrieve
       parameters:
       - in: path
         name: id
@@ -4916,7 +4980,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4928,7 +4992,7 @@ paths:
           description: ''
   /api/v1/product/{id}/reviews{format}:
     get:
-      operationId: api_v1_product_reviews_formatted_retrieve
+      operationId: product_reviews_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -4943,7 +5007,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4955,7 +5019,7 @@ paths:
           description: ''
   /api/v1/product/{id}/tags:
     get:
-      operationId: api_v1_product_tags_retrieve
+      operationId: product_tags_retrieve
       parameters:
       - in: path
         name: id
@@ -4963,7 +5027,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -4975,7 +5039,7 @@ paths:
           description: ''
   /api/v1/product/{id}/tags{format}:
     get:
-      operationId: api_v1_product_tags_formatted_retrieve
+      operationId: product_tags_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -4990,7 +5054,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5002,7 +5066,7 @@ paths:
           description: ''
   /api/v1/product/{id}/update_view_count:
     post:
-      operationId: api_v1_product_update_view_count_create
+      operationId: product_update_view_count_create
       parameters:
       - in: path
         name: id
@@ -5010,7 +5074,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5034,7 +5098,7 @@ paths:
           description: ''
   /api/v1/product/{id}/update_view_count{format}:
     post:
-      operationId: api_v1_product_update_view_count_formatted_create
+      operationId: product_update_view_count_formatted_create
       parameters:
       - in: path
         name: format
@@ -5049,7 +5113,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5073,7 +5137,7 @@ paths:
           description: ''
   /api/v1/product/category:
     get:
-      operationId: api_v1_product_category_list
+      operationId: product_category_list
       parameters:
       - in: query
         name: id
@@ -5104,7 +5168,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5115,9 +5179,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductCategoryList'
           description: ''
     post:
-      operationId: api_v1_product_category_create
+      operationId: product_category_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5141,7 +5205,7 @@ paths:
           description: ''
   /api/v1/product/category{format}:
     get:
-      operationId: api_v1_product_category_formatted_list
+      operationId: product_category_formatted_list
       parameters:
       - in: path
         name: format
@@ -5179,7 +5243,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5190,7 +5254,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductCategoryList'
           description: ''
     post:
-      operationId: api_v1_product_category_formatted_create
+      operationId: product_category_formatted_create
       parameters:
       - in: path
         name: format
@@ -5200,7 +5264,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5224,7 +5288,7 @@ paths:
           description: ''
   /api/v1/product/category/{id}:
     get:
-      operationId: api_v1_product_category_retrieve
+      operationId: product_category_retrieve
       parameters:
       - in: path
         name: id
@@ -5232,7 +5296,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5243,7 +5307,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     put:
-      operationId: api_v1_product_category_update
+      operationId: product_category_update
       parameters:
       - in: path
         name: id
@@ -5251,7 +5315,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5274,7 +5338,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     patch:
-      operationId: api_v1_product_category_partial_update
+      operationId: product_category_partial_update
       parameters:
       - in: path
         name: id
@@ -5282,7 +5346,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5304,7 +5368,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     delete:
-      operationId: api_v1_product_category_destroy
+      operationId: product_category_destroy
       parameters:
       - in: path
         name: id
@@ -5312,7 +5376,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5320,7 +5384,7 @@ paths:
           description: No response body
   /api/v1/product/category/{id}{format}:
     get:
-      operationId: api_v1_product_category_formatted_retrieve
+      operationId: product_category_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -5335,7 +5399,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5346,7 +5410,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     put:
-      operationId: api_v1_product_category_formatted_update
+      operationId: product_category_formatted_update
       parameters:
       - in: path
         name: format
@@ -5361,7 +5425,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5384,7 +5448,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     patch:
-      operationId: api_v1_product_category_formatted_partial_update
+      operationId: product_category_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -5399,7 +5463,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5421,7 +5485,7 @@ paths:
                 $ref: '#/components/schemas/ProductCategory'
           description: ''
     delete:
-      operationId: api_v1_product_category_formatted_destroy
+      operationId: product_category_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -5436,7 +5500,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5444,7 +5508,7 @@ paths:
           description: No response body
   /api/v1/product/favourite:
     get:
-      operationId: api_v1_product_favourite_list
+      operationId: product_favourite_list
       parameters:
       - in: query
         name: id
@@ -5483,7 +5547,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5494,9 +5558,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductFavouriteList'
           description: ''
     post:
-      operationId: api_v1_product_favourite_create
+      operationId: product_favourite_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5520,7 +5584,7 @@ paths:
           description: ''
   /api/v1/product/favourite{format}:
     get:
-      operationId: api_v1_product_favourite_formatted_list
+      operationId: product_favourite_formatted_list
       parameters:
       - in: path
         name: format
@@ -5566,7 +5630,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5577,7 +5641,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductFavouriteList'
           description: ''
     post:
-      operationId: api_v1_product_favourite_formatted_create
+      operationId: product_favourite_formatted_create
       parameters:
       - in: path
         name: format
@@ -5587,7 +5651,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5611,7 +5675,7 @@ paths:
           description: ''
   /api/v1/product/favourite/{id}:
     get:
-      operationId: api_v1_product_favourite_retrieve
+      operationId: product_favourite_retrieve
       parameters:
       - in: path
         name: id
@@ -5619,7 +5683,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5630,7 +5694,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     put:
-      operationId: api_v1_product_favourite_update
+      operationId: product_favourite_update
       parameters:
       - in: path
         name: id
@@ -5638,7 +5702,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5661,7 +5725,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     patch:
-      operationId: api_v1_product_favourite_partial_update
+      operationId: product_favourite_partial_update
       parameters:
       - in: path
         name: id
@@ -5669,7 +5733,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5691,7 +5755,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     delete:
-      operationId: api_v1_product_favourite_destroy
+      operationId: product_favourite_destroy
       parameters:
       - in: path
         name: id
@@ -5699,7 +5763,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5707,7 +5771,7 @@ paths:
           description: No response body
   /api/v1/product/favourite/{id}{format}:
     get:
-      operationId: api_v1_product_favourite_formatted_retrieve
+      operationId: product_favourite_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -5722,7 +5786,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5733,7 +5797,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     put:
-      operationId: api_v1_product_favourite_formatted_update
+      operationId: product_favourite_formatted_update
       parameters:
       - in: path
         name: format
@@ -5748,7 +5812,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5771,7 +5835,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     patch:
-      operationId: api_v1_product_favourite_formatted_partial_update
+      operationId: product_favourite_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -5786,7 +5850,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5808,7 +5872,7 @@ paths:
                 $ref: '#/components/schemas/ProductFavourite'
           description: ''
     delete:
-      operationId: api_v1_product_favourite_formatted_destroy
+      operationId: product_favourite_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -5823,7 +5887,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5831,7 +5895,7 @@ paths:
           description: No response body
   /api/v1/product/favourite/{id}/product:
     get:
-      operationId: api_v1_product_favourite_product_retrieve
+      operationId: product_favourite_product_retrieve
       parameters:
       - in: path
         name: id
@@ -5839,7 +5903,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5851,7 +5915,7 @@ paths:
           description: ''
   /api/v1/product/favourite/{id}/product{format}:
     get:
-      operationId: api_v1_product_favourite_product_formatted_retrieve
+      operationId: product_favourite_product_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -5866,7 +5930,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5878,9 +5942,9 @@ paths:
           description: ''
   /api/v1/product/favourite/favourites_by_products:
     post:
-      operationId: api_v1_product_favourite_favourites_by_products_create
+      operationId: product_favourite_favourites_by_products_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5904,7 +5968,7 @@ paths:
           description: ''
   /api/v1/product/favourite/favourites_by_products{format}:
     post:
-      operationId: api_v1_product_favourite_favourites_by_products_formatted_create
+      operationId: product_favourite_favourites_by_products_formatted_create
       parameters:
       - in: path
         name: format
@@ -5914,7 +5978,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -5938,7 +6002,7 @@ paths:
           description: ''
   /api/v1/product/image:
     get:
-      operationId: api_v1_product_image_list
+      operationId: product_image_list
       parameters:
       - in: query
         name: id
@@ -5977,7 +6041,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -5988,9 +6052,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductImageList'
           description: ''
     post:
-      operationId: api_v1_product_image_create
+      operationId: product_image_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6014,7 +6078,7 @@ paths:
           description: ''
   /api/v1/product/image{format}:
     get:
-      operationId: api_v1_product_image_formatted_list
+      operationId: product_image_formatted_list
       parameters:
       - in: path
         name: format
@@ -6060,7 +6124,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6071,7 +6135,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductImageList'
           description: ''
     post:
-      operationId: api_v1_product_image_formatted_create
+      operationId: product_image_formatted_create
       parameters:
       - in: path
         name: format
@@ -6081,7 +6145,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6105,7 +6169,7 @@ paths:
           description: ''
   /api/v1/product/image/{id}:
     get:
-      operationId: api_v1_product_image_retrieve
+      operationId: product_image_retrieve
       parameters:
       - in: path
         name: id
@@ -6113,7 +6177,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6124,7 +6188,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     put:
-      operationId: api_v1_product_image_update
+      operationId: product_image_update
       parameters:
       - in: path
         name: id
@@ -6132,7 +6196,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6155,7 +6219,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     patch:
-      operationId: api_v1_product_image_partial_update
+      operationId: product_image_partial_update
       parameters:
       - in: path
         name: id
@@ -6163,7 +6227,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6185,7 +6249,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     delete:
-      operationId: api_v1_product_image_destroy
+      operationId: product_image_destroy
       parameters:
       - in: path
         name: id
@@ -6193,7 +6257,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6201,7 +6265,7 @@ paths:
           description: No response body
   /api/v1/product/image/{id}{format}:
     get:
-      operationId: api_v1_product_image_formatted_retrieve
+      operationId: product_image_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -6216,7 +6280,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6227,7 +6291,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     put:
-      operationId: api_v1_product_image_formatted_update
+      operationId: product_image_formatted_update
       parameters:
       - in: path
         name: format
@@ -6242,7 +6306,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6265,7 +6329,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     patch:
-      operationId: api_v1_product_image_formatted_partial_update
+      operationId: product_image_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -6280,7 +6344,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6302,7 +6366,7 @@ paths:
                 $ref: '#/components/schemas/ProductImage'
           description: ''
     delete:
-      operationId: api_v1_product_image_formatted_destroy
+      operationId: product_image_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -6317,7 +6381,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6325,7 +6389,7 @@ paths:
           description: No response body
   /api/v1/product/review:
     get:
-      operationId: api_v1_product_review_list
+      operationId: product_review_list
       parameters:
       - in: query
         name: id
@@ -6376,7 +6440,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6387,9 +6451,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductReviewList'
           description: ''
     post:
-      operationId: api_v1_product_review_create
+      operationId: product_review_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6411,7 +6475,7 @@ paths:
           description: ''
   /api/v1/product/review{format}:
     get:
-      operationId: api_v1_product_review_formatted_list
+      operationId: product_review_formatted_list
       parameters:
       - in: path
         name: format
@@ -6469,7 +6533,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6480,7 +6544,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedProductReviewList'
           description: ''
     post:
-      operationId: api_v1_product_review_formatted_create
+      operationId: product_review_formatted_create
       parameters:
       - in: path
         name: format
@@ -6490,7 +6554,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6512,7 +6576,7 @@ paths:
           description: ''
   /api/v1/product/review/{id}:
     get:
-      operationId: api_v1_product_review_retrieve
+      operationId: product_review_retrieve
       parameters:
       - in: path
         name: id
@@ -6520,7 +6584,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6531,7 +6595,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     put:
-      operationId: api_v1_product_review_update
+      operationId: product_review_update
       parameters:
       - in: path
         name: id
@@ -6539,7 +6603,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6560,7 +6624,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     patch:
-      operationId: api_v1_product_review_partial_update
+      operationId: product_review_partial_update
       parameters:
       - in: path
         name: id
@@ -6568,7 +6632,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6588,7 +6652,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     delete:
-      operationId: api_v1_product_review_destroy
+      operationId: product_review_destroy
       parameters:
       - in: path
         name: id
@@ -6596,13 +6660,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       responses:
         '204':
           description: No response body
   /api/v1/product/review/{id}{format}:
     get:
-      operationId: api_v1_product_review_formatted_retrieve
+      operationId: product_review_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -6617,7 +6681,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6628,7 +6692,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     put:
-      operationId: api_v1_product_review_formatted_update
+      operationId: product_review_formatted_update
       parameters:
       - in: path
         name: format
@@ -6643,7 +6707,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6664,7 +6728,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     patch:
-      operationId: api_v1_product_review_formatted_partial_update
+      operationId: product_review_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -6679,7 +6743,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6699,7 +6763,7 @@ paths:
                 $ref: '#/components/schemas/ProductReview'
           description: ''
     delete:
-      operationId: api_v1_product_review_formatted_destroy
+      operationId: product_review_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -6714,13 +6778,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - product
       responses:
         '204':
           description: No response body
   /api/v1/product/review/{id}/product:
     get:
-      operationId: api_v1_product_review_product_retrieve
+      operationId: product_review_product_retrieve
       parameters:
       - in: path
         name: id
@@ -6728,7 +6792,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6740,7 +6804,7 @@ paths:
           description: ''
   /api/v1/product/review/{id}/product{format}:
     get:
-      operationId: api_v1_product_review_product_formatted_retrieve
+      operationId: product_review_product_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -6755,7 +6819,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - product
       security:
       - {}
       responses:
@@ -6767,9 +6831,9 @@ paths:
           description: ''
   /api/v1/product/review/user_product_review:
     post:
-      operationId: api_v1_product_review_user_product_review_create
+      operationId: product_review_user_product_review_create
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6791,7 +6855,7 @@ paths:
           description: ''
   /api/v1/product/review/user_product_review{format}:
     post:
-      operationId: api_v1_product_review_user_product_review_formatted_create
+      operationId: product_review_user_product_review_formatted_create
       parameters:
       - in: path
         name: format
@@ -6801,7 +6865,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - product
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6823,7 +6887,7 @@ paths:
           description: ''
   /api/v1/region:
     get:
-      operationId: api_v1_region_list
+      operationId: region_list
       parameters:
       - in: query
         name: alpha
@@ -6859,7 +6923,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -6870,9 +6934,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedRegionList'
           description: ''
     post:
-      operationId: api_v1_region_create
+      operationId: region_create
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6896,7 +6960,7 @@ paths:
           description: ''
   /api/v1/region{format}:
     get:
-      operationId: api_v1_region_formatted_list
+      operationId: region_formatted_list
       parameters:
       - in: query
         name: alpha
@@ -6939,7 +7003,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -6950,7 +7014,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedRegionList'
           description: ''
     post:
-      operationId: api_v1_region_formatted_create
+      operationId: region_formatted_create
       parameters:
       - in: path
         name: format
@@ -6960,7 +7024,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -6984,7 +7048,7 @@ paths:
           description: ''
   /api/v1/region/{alpha}:
     get:
-      operationId: api_v1_region_retrieve
+      operationId: region_retrieve
       parameters:
       - in: path
         name: alpha
@@ -6994,7 +7058,7 @@ paths:
         description: A unique value identifying this Region.
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7005,7 +7069,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     put:
-      operationId: api_v1_region_update
+      operationId: region_update
       parameters:
       - in: path
         name: alpha
@@ -7015,7 +7079,7 @@ paths:
         description: A unique value identifying this Region.
         required: true
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7038,7 +7102,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     patch:
-      operationId: api_v1_region_partial_update
+      operationId: region_partial_update
       parameters:
       - in: path
         name: alpha
@@ -7048,7 +7112,7 @@ paths:
         description: A unique value identifying this Region.
         required: true
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7070,7 +7134,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     delete:
-      operationId: api_v1_region_destroy
+      operationId: region_destroy
       parameters:
       - in: path
         name: alpha
@@ -7080,7 +7144,7 @@ paths:
         description: A unique value identifying this Region.
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7088,7 +7152,7 @@ paths:
           description: No response body
   /api/v1/region/{alpha}{format}:
     get:
-      operationId: api_v1_region_formatted_retrieve
+      operationId: region_formatted_retrieve
       parameters:
       - in: path
         name: alpha
@@ -7105,7 +7169,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7116,7 +7180,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     put:
-      operationId: api_v1_region_formatted_update
+      operationId: region_formatted_update
       parameters:
       - in: path
         name: alpha
@@ -7133,7 +7197,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7156,7 +7220,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     patch:
-      operationId: api_v1_region_formatted_partial_update
+      operationId: region_formatted_partial_update
       parameters:
       - in: path
         name: alpha
@@ -7173,7 +7237,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7195,7 +7259,7 @@ paths:
                 $ref: '#/components/schemas/Region'
           description: ''
     delete:
-      operationId: api_v1_region_formatted_destroy
+      operationId: region_formatted_destroy
       parameters:
       - in: path
         name: alpha
@@ -7212,7 +7276,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7220,7 +7284,7 @@ paths:
           description: No response body
   /api/v1/region/{alpha}/get_regions_by_country_alpha_2:
     get:
-      operationId: api_v1_region_get_regions_by_country_alpha_2_retrieve
+      operationId: region_get_regions_by_country_alpha_2_retrieve
       parameters:
       - in: path
         name: alpha
@@ -7230,7 +7294,7 @@ paths:
         description: A unique value identifying this Region.
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7242,7 +7306,7 @@ paths:
           description: ''
   /api/v1/region/{alpha}/get_regions_by_country_alpha_2{format}:
     get:
-      operationId: api_v1_region_get_regions_by_country_alpha_2_formatted_retrieve
+      operationId: region_get_regions_by_country_alpha_2_formatted_retrieve
       parameters:
       - in: path
         name: alpha
@@ -7259,7 +7323,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - region
       security:
       - {}
       responses:
@@ -7271,17 +7335,23 @@ paths:
           description: ''
   /api/v1/search/blog/post:
     get:
-      operationId: api_v1_search_blog_post_retrieve
+      operationId: search_blog_post_retrieve
+      description: Search blog posts with MeiliSearch
       tags:
-      - api
+      - search
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostMeiliSearchResponse'
+          description: ''
   /api/v1/search/blog/post{format}:
     get:
-      operationId: api_v1_search_blog_post_formatted_retrieve
+      operationId: search_blog_post_formatted_retrieve
+      description: Search blog posts with MeiliSearch
       parameters:
       - in: path
         name: format
@@ -7291,25 +7361,35 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - search
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlogPostMeiliSearchResponse'
+          description: ''
   /api/v1/search/product:
     get:
-      operationId: api_v1_search_product_retrieve
+      operationId: search_product_retrieve
+      description: Search products with MeiliSearch
       tags:
-      - api
+      - search
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMeiliSearchResponse'
+          description: ''
   /api/v1/search/product{format}:
     get:
-      operationId: api_v1_search_product_formatted_retrieve
+      operationId: search_product_formatted_retrieve
+      description: Search products with MeiliSearch
       parameters:
       - in: path
         name: format
@@ -7319,15 +7399,19 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - search
       security:
       - {}
       responses:
         '200':
-          description: No response body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductMeiliSearchResponse'
+          description: ''
   /api/v1/slide:
     get:
-      operationId: api_v1_slide_list
+      operationId: slide_list
       parameters:
       - in: query
         name: id
@@ -7362,7 +7446,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7373,9 +7457,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlideList'
           description: ''
     post:
-      operationId: api_v1_slide_create
+      operationId: slide_create
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7399,7 +7483,7 @@ paths:
           description: ''
   /api/v1/slide{format}:
     get:
-      operationId: api_v1_slide_formatted_list
+      operationId: slide_formatted_list
       parameters:
       - in: path
         name: format
@@ -7441,7 +7525,7 @@ paths:
         schema:
           type: integer
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7452,7 +7536,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedSlideList'
           description: ''
     post:
-      operationId: api_v1_slide_formatted_create
+      operationId: slide_formatted_create
       parameters:
       - in: path
         name: format
@@ -7462,7 +7546,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7486,7 +7570,7 @@ paths:
           description: ''
   /api/v1/slide/{id}:
     get:
-      operationId: api_v1_slide_retrieve
+      operationId: slide_retrieve
       parameters:
       - in: path
         name: id
@@ -7494,7 +7578,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7505,7 +7589,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     put:
-      operationId: api_v1_slide_update
+      operationId: slide_update
       parameters:
       - in: path
         name: id
@@ -7513,7 +7597,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7536,7 +7620,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     patch:
-      operationId: api_v1_slide_partial_update
+      operationId: slide_partial_update
       parameters:
       - in: path
         name: id
@@ -7544,7 +7628,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7566,7 +7650,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     delete:
-      operationId: api_v1_slide_destroy
+      operationId: slide_destroy
       parameters:
       - in: path
         name: id
@@ -7574,7 +7658,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7582,7 +7666,7 @@ paths:
           description: No response body
   /api/v1/slide/{id}{format}:
     get:
-      operationId: api_v1_slide_formatted_retrieve
+      operationId: slide_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -7597,7 +7681,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7608,7 +7692,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     put:
-      operationId: api_v1_slide_formatted_update
+      operationId: slide_formatted_update
       parameters:
       - in: path
         name: format
@@ -7623,7 +7707,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7646,7 +7730,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     patch:
-      operationId: api_v1_slide_formatted_partial_update
+      operationId: slide_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -7661,7 +7745,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7683,7 +7767,7 @@ paths:
                 $ref: '#/components/schemas/Slide'
           description: ''
     delete:
-      operationId: api_v1_slide_formatted_destroy
+      operationId: slide_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -7698,7 +7782,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slide
       security:
       - {}
       responses:
@@ -7706,7 +7790,7 @@ paths:
           description: No response body
   /api/v1/slider:
     get:
-      operationId: api_v1_slider_list
+      operationId: slider_list
       parameters:
       - in: query
         name: id
@@ -7737,7 +7821,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -7748,9 +7832,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedSliderList'
           description: ''
     post:
-      operationId: api_v1_slider_create
+      operationId: slider_create
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7774,7 +7858,7 @@ paths:
           description: ''
   /api/v1/slider{format}:
     get:
-      operationId: api_v1_slider_formatted_list
+      operationId: slider_formatted_list
       parameters:
       - in: path
         name: format
@@ -7812,7 +7896,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -7823,7 +7907,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedSliderList'
           description: ''
     post:
-      operationId: api_v1_slider_formatted_create
+      operationId: slider_formatted_create
       parameters:
       - in: path
         name: format
@@ -7833,7 +7917,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7857,7 +7941,7 @@ paths:
           description: ''
   /api/v1/slider/{id}:
     get:
-      operationId: api_v1_slider_retrieve
+      operationId: slider_retrieve
       parameters:
       - in: path
         name: id
@@ -7865,7 +7949,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -7876,7 +7960,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     put:
-      operationId: api_v1_slider_update
+      operationId: slider_update
       parameters:
       - in: path
         name: id
@@ -7884,7 +7968,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7907,7 +7991,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     patch:
-      operationId: api_v1_slider_partial_update
+      operationId: slider_partial_update
       parameters:
       - in: path
         name: id
@@ -7915,7 +7999,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -7937,7 +8021,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     delete:
-      operationId: api_v1_slider_destroy
+      operationId: slider_destroy
       parameters:
       - in: path
         name: id
@@ -7945,7 +8029,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -7953,7 +8037,7 @@ paths:
           description: No response body
   /api/v1/slider/{id}{format}:
     get:
-      operationId: api_v1_slider_formatted_retrieve
+      operationId: slider_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -7968,7 +8052,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -7979,7 +8063,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     put:
-      operationId: api_v1_slider_formatted_update
+      operationId: slider_formatted_update
       parameters:
       - in: path
         name: format
@@ -7994,7 +8078,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8017,7 +8101,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     patch:
-      operationId: api_v1_slider_formatted_partial_update
+      operationId: slider_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -8032,7 +8116,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8054,7 +8138,7 @@ paths:
                 $ref: '#/components/schemas/Slider'
           description: ''
     delete:
-      operationId: api_v1_slider_formatted_destroy
+      operationId: slider_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -8069,7 +8153,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - slider
       security:
       - {}
       responses:
@@ -8077,7 +8161,7 @@ paths:
           description: No response body
   /api/v1/tip:
     get:
-      operationId: api_v1_tip_list
+      operationId: tip_list
       parameters:
       - in: query
         name: active
@@ -8126,7 +8210,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8137,9 +8221,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedTipList'
           description: ''
     post:
-      operationId: api_v1_tip_create
+      operationId: tip_create
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8163,7 +8247,7 @@ paths:
           description: ''
   /api/v1/tip{format}:
     get:
-      operationId: api_v1_tip_formatted_list
+      operationId: tip_formatted_list
       parameters:
       - in: query
         name: active
@@ -8219,7 +8303,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8230,7 +8314,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedTipList'
           description: ''
     post:
-      operationId: api_v1_tip_formatted_create
+      operationId: tip_formatted_create
       parameters:
       - in: path
         name: format
@@ -8240,7 +8324,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8264,7 +8348,7 @@ paths:
           description: ''
   /api/v1/tip/{id}:
     get:
-      operationId: api_v1_tip_retrieve
+      operationId: tip_retrieve
       parameters:
       - in: path
         name: id
@@ -8272,7 +8356,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8283,7 +8367,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     put:
-      operationId: api_v1_tip_update
+      operationId: tip_update
       parameters:
       - in: path
         name: id
@@ -8291,7 +8375,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8314,7 +8398,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     patch:
-      operationId: api_v1_tip_partial_update
+      operationId: tip_partial_update
       parameters:
       - in: path
         name: id
@@ -8322,7 +8406,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8344,7 +8428,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     delete:
-      operationId: api_v1_tip_destroy
+      operationId: tip_destroy
       parameters:
       - in: path
         name: id
@@ -8352,7 +8436,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8360,7 +8444,7 @@ paths:
           description: No response body
   /api/v1/tip/{id}{format}:
     get:
-      operationId: api_v1_tip_formatted_retrieve
+      operationId: tip_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -8375,7 +8459,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8386,7 +8470,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     put:
-      operationId: api_v1_tip_formatted_update
+      operationId: tip_formatted_update
       parameters:
       - in: path
         name: format
@@ -8401,7 +8485,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8424,7 +8508,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     patch:
-      operationId: api_v1_tip_formatted_partial_update
+      operationId: tip_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -8439,7 +8523,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8461,7 +8545,7 @@ paths:
                 $ref: '#/components/schemas/Tip'
           description: ''
     delete:
-      operationId: api_v1_tip_formatted_destroy
+      operationId: tip_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -8476,7 +8560,7 @@ paths:
           type: string
         required: true
       tags:
-      - api
+      - tip
       security:
       - {}
       responses:
@@ -8484,7 +8568,7 @@ paths:
           description: No response body
   /api/v1/user/account:
     get:
-      operationId: api_v1_user_account_list
+      operationId: user_account_list
       parameters:
       - in: query
         name: email
@@ -8519,7 +8603,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8530,9 +8614,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedAuthenticationList'
           description: ''
     post:
-      operationId: api_v1_user_account_create
+      operationId: user_account_create
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8556,7 +8640,7 @@ paths:
           description: ''
   /api/v1/user/account{format}:
     get:
-      operationId: api_v1_user_account_formatted_list
+      operationId: user_account_formatted_list
       parameters:
       - in: query
         name: email
@@ -8598,7 +8682,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8609,7 +8693,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedAuthenticationList'
           description: ''
     post:
-      operationId: api_v1_user_account_formatted_create
+      operationId: user_account_formatted_create
       parameters:
       - in: path
         name: format
@@ -8619,7 +8703,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8643,7 +8727,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}:
     get:
-      operationId: api_v1_user_account_retrieve
+      operationId: user_account_retrieve
       parameters:
       - in: path
         name: id
@@ -8651,7 +8735,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8662,7 +8746,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     put:
-      operationId: api_v1_user_account_update
+      operationId: user_account_update
       parameters:
       - in: path
         name: id
@@ -8670,7 +8754,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8693,7 +8777,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     patch:
-      operationId: api_v1_user_account_partial_update
+      operationId: user_account_partial_update
       parameters:
       - in: path
         name: id
@@ -8701,7 +8785,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8723,7 +8807,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     delete:
-      operationId: api_v1_user_account_destroy
+      operationId: user_account_destroy
       parameters:
       - in: path
         name: id
@@ -8731,7 +8815,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8739,7 +8823,7 @@ paths:
           description: No response body
   /api/v1/user/account/{id}{format}:
     get:
-      operationId: api_v1_user_account_formatted_retrieve
+      operationId: user_account_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -8754,7 +8838,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8765,7 +8849,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     put:
-      operationId: api_v1_user_account_formatted_update
+      operationId: user_account_formatted_update
       parameters:
       - in: path
         name: format
@@ -8780,7 +8864,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8803,7 +8887,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     patch:
-      operationId: api_v1_user_account_formatted_partial_update
+      operationId: user_account_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -8818,7 +8902,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8840,7 +8924,7 @@ paths:
                 $ref: '#/components/schemas/Authentication'
           description: ''
     delete:
-      operationId: api_v1_user_account_formatted_destroy
+      operationId: user_account_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -8855,7 +8939,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8863,7 +8947,7 @@ paths:
           description: No response body
   /api/v1/user/account/{id}/addresses:
     get:
-      operationId: api_v1_user_account_addresses_retrieve
+      operationId: user_account_addresses_retrieve
       parameters:
       - in: path
         name: id
@@ -8871,7 +8955,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8883,7 +8967,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/addresses{format}:
     get:
-      operationId: api_v1_user_account_addresses_formatted_retrieve
+      operationId: user_account_addresses_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -8898,7 +8982,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8910,7 +8994,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/blog_post_comments:
     get:
-      operationId: api_v1_user_account_blog_post_comments_retrieve
+      operationId: user_account_blog_post_comments_retrieve
       parameters:
       - in: path
         name: id
@@ -8918,7 +9002,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8930,7 +9014,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/blog_post_comments{format}:
     get:
-      operationId: api_v1_user_account_blog_post_comments_formatted_retrieve
+      operationId: user_account_blog_post_comments_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -8945,7 +9029,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -8957,7 +9041,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/change_username:
     post:
-      operationId: api_v1_user_account_change_username_create
+      operationId: user_account_change_username_create
       parameters:
       - in: path
         name: id
@@ -8965,7 +9049,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -8989,7 +9073,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/change_username{format}:
     post:
-      operationId: api_v1_user_account_change_username_formatted_create
+      operationId: user_account_change_username_formatted_create
       parameters:
       - in: path
         name: format
@@ -9004,7 +9088,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9028,7 +9112,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/favourite_products:
     get:
-      operationId: api_v1_user_account_favourite_products_retrieve
+      operationId: user_account_favourite_products_retrieve
       parameters:
       - in: path
         name: id
@@ -9036,7 +9120,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9048,7 +9132,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/favourite_products{format}:
     get:
-      operationId: api_v1_user_account_favourite_products_formatted_retrieve
+      operationId: user_account_favourite_products_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9063,7 +9147,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9075,7 +9159,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/liked_blog_posts:
     get:
-      operationId: api_v1_user_account_liked_blog_posts_retrieve
+      operationId: user_account_liked_blog_posts_retrieve
       parameters:
       - in: path
         name: id
@@ -9083,7 +9167,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9095,7 +9179,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/liked_blog_posts{format}:
     get:
-      operationId: api_v1_user_account_liked_blog_posts_formatted_retrieve
+      operationId: user_account_liked_blog_posts_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9110,7 +9194,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9122,7 +9206,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/notifications:
     get:
-      operationId: api_v1_user_account_notifications_retrieve
+      operationId: user_account_notifications_retrieve
       parameters:
       - in: path
         name: id
@@ -9130,7 +9214,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9142,7 +9226,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/notifications{format}:
     get:
-      operationId: api_v1_user_account_notifications_formatted_retrieve
+      operationId: user_account_notifications_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9157,7 +9241,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9169,7 +9253,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/orders:
     get:
-      operationId: api_v1_user_account_orders_retrieve
+      operationId: user_account_orders_retrieve
       parameters:
       - in: path
         name: id
@@ -9177,7 +9261,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9189,7 +9273,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/orders{format}:
     get:
-      operationId: api_v1_user_account_orders_formatted_retrieve
+      operationId: user_account_orders_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9204,7 +9288,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9216,7 +9300,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/product_reviews:
     get:
-      operationId: api_v1_user_account_product_reviews_retrieve
+      operationId: user_account_product_reviews_retrieve
       parameters:
       - in: path
         name: id
@@ -9224,7 +9308,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9236,7 +9320,7 @@ paths:
           description: ''
   /api/v1/user/account/{id}/product_reviews{format}:
     get:
-      operationId: api_v1_user_account_product_reviews_formatted_retrieve
+      operationId: user_account_product_reviews_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9251,7 +9335,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       security:
       - {}
       responses:
@@ -9263,7 +9347,7 @@ paths:
           description: ''
   /api/v1/user/address:
     get:
-      operationId: api_v1_user_address_list
+      operationId: user_address_list
       parameters:
       - in: query
         name: city
@@ -9355,7 +9439,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - user
       responses:
         '200':
           content:
@@ -9364,9 +9448,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedUserAddressList'
           description: ''
     post:
-      operationId: api_v1_user_address_create
+      operationId: user_address_create
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9388,7 +9472,7 @@ paths:
           description: ''
   /api/v1/user/address{format}:
     get:
-      operationId: api_v1_user_address_formatted_list
+      operationId: user_address_formatted_list
       parameters:
       - in: query
         name: city
@@ -9487,7 +9571,7 @@ paths:
         schema:
           type: string
       tags:
-      - api
+      - user
       responses:
         '200':
           content:
@@ -9496,7 +9580,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedUserAddressList'
           description: ''
     post:
-      operationId: api_v1_user_address_formatted_create
+      operationId: user_address_formatted_create
       parameters:
       - in: path
         name: format
@@ -9506,7 +9590,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9528,7 +9612,7 @@ paths:
           description: ''
   /api/v1/user/address/{id}:
     get:
-      operationId: api_v1_user_address_retrieve
+      operationId: user_address_retrieve
       parameters:
       - in: path
         name: id
@@ -9536,7 +9620,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       responses:
         '200':
           content:
@@ -9545,7 +9629,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     put:
-      operationId: api_v1_user_address_update
+      operationId: user_address_update
       parameters:
       - in: path
         name: id
@@ -9553,7 +9637,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9574,7 +9658,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     patch:
-      operationId: api_v1_user_address_partial_update
+      operationId: user_address_partial_update
       parameters:
       - in: path
         name: id
@@ -9582,7 +9666,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9602,7 +9686,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     delete:
-      operationId: api_v1_user_address_destroy
+      operationId: user_address_destroy
       parameters:
       - in: path
         name: id
@@ -9610,13 +9694,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       responses:
         '204':
           description: No response body
   /api/v1/user/address/{id}{format}:
     get:
-      operationId: api_v1_user_address_formatted_retrieve
+      operationId: user_address_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -9631,7 +9715,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       responses:
         '200':
           content:
@@ -9640,7 +9724,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     put:
-      operationId: api_v1_user_address_formatted_update
+      operationId: user_address_formatted_update
       parameters:
       - in: path
         name: format
@@ -9655,7 +9739,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9676,7 +9760,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     patch:
-      operationId: api_v1_user_address_formatted_partial_update
+      operationId: user_address_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -9691,7 +9775,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9711,7 +9795,7 @@ paths:
                 $ref: '#/components/schemas/UserAddress'
           description: ''
     delete:
-      operationId: api_v1_user_address_formatted_destroy
+      operationId: user_address_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -9726,13 +9810,13 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       responses:
         '204':
           description: No response body
   /api/v1/user/address/{id}/set_main:
     post:
-      operationId: api_v1_user_address_set_main_create
+      operationId: user_address_set_main_create
       parameters:
       - in: path
         name: id
@@ -9740,7 +9824,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9762,7 +9846,7 @@ paths:
           description: ''
   /api/v1/user/address/{id}/set_main{format}:
     post:
-      operationId: api_v1_user_address_set_main_formatted_create
+      operationId: user_address_set_main_formatted_create
       parameters:
       - in: path
         name: format
@@ -9777,7 +9861,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - user
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9799,7 +9883,7 @@ paths:
           description: ''
   /api/v1/vat:
     get:
-      operationId: api_v1_vat_list
+      operationId: vat_list
       parameters:
       - in: query
         name: id
@@ -9834,7 +9918,7 @@ paths:
         schema:
           type: number
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -9845,9 +9929,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedVatList'
           description: ''
     post:
-      operationId: api_v1_vat_create
+      operationId: vat_create
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9870,7 +9954,7 @@ paths:
           description: ''
   /api/v1/vat{format}:
     get:
-      operationId: api_v1_vat_formatted_list
+      operationId: vat_formatted_list
       parameters:
       - in: path
         name: format
@@ -9912,7 +9996,7 @@ paths:
         schema:
           type: number
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -9923,7 +10007,7 @@ paths:
                 $ref: '#/components/schemas/PaginatedVatList'
           description: ''
     post:
-      operationId: api_v1_vat_formatted_create
+      operationId: vat_formatted_create
       parameters:
       - in: path
         name: format
@@ -9933,7 +10017,7 @@ paths:
           - .json
         required: true
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -9956,7 +10040,7 @@ paths:
           description: ''
   /api/v1/vat/{id}:
     get:
-      operationId: api_v1_vat_retrieve
+      operationId: vat_retrieve
       parameters:
       - in: path
         name: id
@@ -9964,7 +10048,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -9975,7 +10059,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     put:
-      operationId: api_v1_vat_update
+      operationId: vat_update
       parameters:
       - in: path
         name: id
@@ -9983,7 +10067,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -10005,7 +10089,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     patch:
-      operationId: api_v1_vat_partial_update
+      operationId: vat_partial_update
       parameters:
       - in: path
         name: id
@@ -10013,7 +10097,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -10035,7 +10119,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     delete:
-      operationId: api_v1_vat_destroy
+      operationId: vat_destroy
       parameters:
       - in: path
         name: id
@@ -10043,7 +10127,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -10051,7 +10135,7 @@ paths:
           description: No response body
   /api/v1/vat/{id}{format}:
     get:
-      operationId: api_v1_vat_formatted_retrieve
+      operationId: vat_formatted_retrieve
       parameters:
       - in: path
         name: format
@@ -10066,7 +10150,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -10077,7 +10161,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     put:
-      operationId: api_v1_vat_formatted_update
+      operationId: vat_formatted_update
       parameters:
       - in: path
         name: format
@@ -10092,7 +10176,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -10114,7 +10198,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     patch:
-      operationId: api_v1_vat_formatted_partial_update
+      operationId: vat_formatted_partial_update
       parameters:
       - in: path
         name: format
@@ -10129,7 +10213,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -10151,7 +10235,7 @@ paths:
                 $ref: '#/components/schemas/Vat'
           description: ''
     delete:
-      operationId: api_v1_vat_formatted_destroy
+      operationId: vat_formatted_destroy
       parameters:
       - in: path
         name: format
@@ -10166,7 +10250,7 @@ paths:
           type: integer
         required: true
       tags:
-      - api
+      - vat
       security:
       - {}
       responses:
@@ -10195,11 +10279,9 @@ components:
           maxLength: 254
         firstName:
           type: string
-          nullable: true
           maxLength: 255
         lastName:
           type: string
-          nullable: true
           maxLength: 255
         id:
           type: integer
@@ -10221,20 +10303,16 @@ components:
           type: string
         city:
           type: string
-          nullable: true
           maxLength: 255
         zipcode:
           type: string
-          nullable: true
           title: Zip Code
           maxLength: 255
         address:
           type: string
-          nullable: true
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         country:
           type: string
@@ -10251,47 +10329,39 @@ components:
         twitter:
           type: string
           format: uri
-          nullable: true
           title: Twitter Profile
           maxLength: 200
         linkedin:
           type: string
           format: uri
-          nullable: true
           title: LinkedIn Profile
           maxLength: 200
         facebook:
           type: string
           format: uri
-          nullable: true
           title: Facebook Profile
           maxLength: 200
         instagram:
           type: string
           format: uri
-          nullable: true
           title: Instagram Profile
           maxLength: 200
         website:
           type: string
           format: uri
-          nullable: true
           maxLength: 200
         youtube:
           type: string
           format: uri
-          nullable: true
           title: Youtube Profile
           maxLength: 200
         github:
           type: string
           format: uri
-          nullable: true
           title: Github Profile
           maxLength: 200
         bio:
           type: string
-          nullable: true
         isActive:
           type: boolean
           readOnly: true
@@ -10365,7 +10435,6 @@ components:
         website:
           type: string
           format: uri
-          nullable: true
           maxLength: 200
         createdAt:
           type: string
@@ -10380,10 +10449,10 @@ components:
           format: uuid
           readOnly: true
         numberOfPosts:
-          type: integer
+          type: string
           readOnly: true
         totalLikesReceived:
-          type: integer
+          type: string
           readOnly: true
       required:
       - createdAt
@@ -10430,11 +10499,7 @@ components:
           maxLength: 255
           pattern: ^[-a-zA-Z0-9_]+$
         children:
-          oneOf:
-          - type: object
-            additionalProperties: {}
-          - type: array
-            items: {}
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -10468,7 +10533,7 @@ components:
           type: string
           readOnly: true
         recursivePostCount:
-          type: integer
+          type: string
           readOnly: true
       required:
       - absoluteUrl
@@ -10520,9 +10585,7 @@ components:
         post:
           type: integer
         children:
-          type: array
-          items:
-            type: integer
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -10546,10 +10609,10 @@ components:
           format: uuid
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         repliesCount:
-          type: integer
+          type: string
           readOnly: true
       required:
       - children
@@ -10642,7 +10705,7 @@ components:
           readOnly: true
           nullable: true
         isVisible:
-          type: boolean
+          type: string
           readOnly: true
         uuid:
           type: string
@@ -10652,28 +10715,25 @@ components:
           type: string
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         commentsCount:
-          type: integer
+          type: string
           readOnly: true
         tagsCount:
-          type: integer
+          type: string
           readOnly: true
         absoluteUrl:
           type: string
           readOnly: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
       required:
       - absoluteUrl
@@ -10693,6 +10753,61 @@ components:
       - translations
       - updatedAt
       - uuid
+    BlogPostMeiliSearchResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        estimatedTotalHits:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlogPostMeiliSearchResult'
+      required:
+      - estimatedTotalHits
+      - limit
+      - offset
+      - results
+    BlogPostMeiliSearchResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        languageCode:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        body:
+          type: string
+        master:
+          type: integer
+        absoluteUrl:
+          type: string
+        mainImagePath:
+          type: string
+        matchesPosition: {}
+        rankingScore:
+          type: number
+          format: double
+          nullable: true
+        formatted: {}
+      required:
+      - absoluteUrl
+      - body
+      - formatted
+      - id
+      - languageCode
+      - mainImagePath
+      - master
+      - matchesPosition
+      - rankingScore
+      - subtitle
+      - title
     BlogPostStatusEnum:
       enum:
       - DRAFT
@@ -10759,7 +10874,7 @@ components:
           format: uuid
           readOnly: true
         getPostsCount:
-          type: integer
+          type: string
           readOnly: true
       required:
       - createdAt
@@ -10803,10 +10918,10 @@ components:
           exclusiveMinimum: true
           readOnly: true
         totalItems:
-          type: integer
+          type: string
           readOnly: true
         totalItemsUnique:
-          type: integer
+          type: string
           readOnly: true
         cartItems:
           type: array
@@ -10825,10 +10940,15 @@ components:
           type: string
           format: uuid
           readOnly: true
+        lastActivity:
+          type: string
+          format: date-time
+          readOnly: true
       required:
       - cartItems
       - createdAt
       - id
+      - lastActivity
       - totalDiscountValue
       - totalItems
       - totalItemsUnique
@@ -10878,18 +10998,13 @@ components:
           exclusiveMinimum: true
           readOnly: true
         priceSavePercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         discountPercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         vatPercent:
-          oneOf:
-          - type: number
-            format: double
-          - type: integer
+          type: string
           readOnly: true
         vatValue:
           type: number
@@ -10949,9 +11064,6 @@ components:
         id:
           type: integer
           readOnly: true
-        cart:
-          type: integer
-          readOnly: true
         product:
           type: integer
         quantity:
@@ -10959,7 +11071,6 @@ components:
           maximum: 2147483647
           minimum: 0
       required:
-      - cart
       - id
       - product
     Checkout:
@@ -10980,17 +11091,13 @@ components:
           title: Region Code
           nullable: true
         floor:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/FloorEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         locationType:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/LocationTypeEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         street:
           type: string
           maxLength: 255
@@ -11017,7 +11124,6 @@ components:
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         city:
           type: string
@@ -11035,7 +11141,6 @@ components:
           exclusiveMinimum: true
         customerNotes:
           type: string
-          nullable: true
         items:
           type: array
           items:
@@ -11233,7 +11338,6 @@ components:
       - 5
       - 6
       - 7
-      type: integer
       description: |-
         * `0` - Basement
         * `1` - Ground Floor
@@ -11243,12 +11347,24 @@ components:
         * `5` - Fourth Floor
         * `6` - Fifth Floor
         * `7` - Sixth Floor Plus
+    HealthCheckResponse:
+      type: object
+      properties:
+        database:
+          type: boolean
+        redis:
+          type: boolean
+        celery:
+          type: boolean
+      required:
+      - celery
+      - database
+      - redis
     LocationTypeEnum:
       enum:
       - 0
       - 1
       - 2
-      type: integer
       description: |-
         * `0` - Αρχική
         * `1` - Office
@@ -11287,7 +11403,6 @@ components:
         link:
           type: string
           format: uri
-          nullable: true
           maxLength: 200
         kind:
           $ref: '#/components/schemas/NotificationKindEnum'
@@ -11392,17 +11507,13 @@ components:
           - $ref: '#/components/schemas/Region'
           readOnly: true
         floor:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/FloorEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         locationType:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/LocationTypeEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         street:
           type: string
           maxLength: 255
@@ -11430,7 +11541,6 @@ components:
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         city:
           type: string
@@ -11441,7 +11551,6 @@ components:
           type: string
         customerNotes:
           type: string
-          nullable: true
         paidAmount:
           type: number
           format: double
@@ -11532,17 +11641,13 @@ components:
           title: Region Code
           nullable: true
         floor:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/FloorEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         locationType:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/LocationTypeEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         street:
           type: string
           maxLength: 255
@@ -11569,7 +11674,6 @@ components:
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         city:
           type: string
@@ -11587,7 +11691,6 @@ components:
           exclusiveMinimum: true
         customerNotes:
           type: string
-          nullable: true
         items:
           type: array
           items:
@@ -12234,11 +12337,9 @@ components:
           maxLength: 254
         firstName:
           type: string
-          nullable: true
           maxLength: 255
         lastName:
           type: string
-          nullable: true
           maxLength: 255
         id:
           type: integer
@@ -12260,20 +12361,16 @@ components:
           type: string
         city:
           type: string
-          nullable: true
           maxLength: 255
         zipcode:
           type: string
-          nullable: true
           title: Zip Code
           maxLength: 255
         address:
           type: string
-          nullable: true
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         country:
           type: string
@@ -12290,47 +12387,39 @@ components:
         twitter:
           type: string
           format: uri
-          nullable: true
           title: Twitter Profile
           maxLength: 200
         linkedin:
           type: string
           format: uri
-          nullable: true
           title: LinkedIn Profile
           maxLength: 200
         facebook:
           type: string
           format: uri
-          nullable: true
           title: Facebook Profile
           maxLength: 200
         instagram:
           type: string
           format: uri
-          nullable: true
           title: Instagram Profile
           maxLength: 200
         website:
           type: string
           format: uri
-          nullable: true
           maxLength: 200
         youtube:
           type: string
           format: uri
-          nullable: true
           title: Youtube Profile
           maxLength: 200
         github:
           type: string
           format: uri
-          nullable: true
           title: Github Profile
           maxLength: 200
         bio:
           type: string
-          nullable: true
         isActive:
           type: boolean
           readOnly: true
@@ -12390,7 +12479,6 @@ components:
         website:
           type: string
           format: uri
-          nullable: true
           maxLength: 200
         createdAt:
           type: string
@@ -12405,10 +12493,10 @@ components:
           format: uuid
           readOnly: true
         numberOfPosts:
-          type: integer
+          type: string
           readOnly: true
         totalLikesReceived:
-          type: integer
+          type: string
           readOnly: true
     PatchedBlogCategory:
       type: object
@@ -12446,11 +12534,7 @@ components:
           maxLength: 255
           pattern: ^[-a-zA-Z0-9_]+$
         children:
-          oneOf:
-          - type: object
-            additionalProperties: {}
-          - type: array
-            items: {}
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -12484,7 +12568,7 @@ components:
           type: string
           readOnly: true
         recursivePostCount:
-          type: integer
+          type: string
           readOnly: true
     PatchedBlogComment:
       type: object
@@ -12522,9 +12606,7 @@ components:
         post:
           type: integer
         children:
-          type: array
-          items:
-            type: integer
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -12548,10 +12630,10 @@ components:
           format: uuid
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         repliesCount:
-          type: integer
+          type: string
           readOnly: true
     PatchedBlogPost:
       type: object
@@ -12631,7 +12713,7 @@ components:
           readOnly: true
           nullable: true
         isVisible:
-          type: boolean
+          type: string
           readOnly: true
         uuid:
           type: string
@@ -12641,28 +12723,25 @@ components:
           type: string
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         commentsCount:
-          type: integer
+          type: string
           readOnly: true
         tagsCount:
-          type: integer
+          type: string
           readOnly: true
         absoluteUrl:
           type: string
           readOnly: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
     PatchedBlogTag:
       type: object
@@ -12720,7 +12799,7 @@ components:
           format: uuid
           readOnly: true
         getPostsCount:
-          type: integer
+          type: string
           readOnly: true
     PatchedCart:
       type: object
@@ -12756,10 +12835,10 @@ components:
           exclusiveMinimum: true
           readOnly: true
         totalItems:
-          type: integer
+          type: string
           readOnly: true
         totalItemsUnique:
-          type: integer
+          type: string
           readOnly: true
         cartItems:
           type: array
@@ -12777,6 +12856,10 @@ components:
         uuid:
           type: string
           format: uuid
+          readOnly: true
+        lastActivity:
+          type: string
+          format: date-time
           readOnly: true
     PatchedCartItem:
       type: object
@@ -12820,18 +12903,13 @@ components:
           exclusiveMinimum: true
           readOnly: true
         priceSavePercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         discountPercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         vatPercent:
-          oneOf:
-          - type: number
-            format: double
-          - type: integer
+          type: string
           readOnly: true
         vatValue:
           type: number
@@ -12977,17 +13055,13 @@ components:
           title: Region Code
           nullable: true
         floor:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/FloorEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         locationType:
-          nullable: true
           oneOf:
           - $ref: '#/components/schemas/LocationTypeEnum'
           - $ref: '#/components/schemas/BlankEnum'
-          - $ref: '#/components/schemas/NullEnum'
         street:
           type: string
           maxLength: 255
@@ -13014,7 +13088,6 @@ components:
           maxLength: 255
         place:
           type: string
-          nullable: true
           maxLength: 255
         city:
           type: string
@@ -13032,7 +13105,6 @@ components:
           exclusiveMinimum: true
         customerNotes:
           type: string
-          nullable: true
         items:
           type: array
           items:
@@ -13214,15 +13286,12 @@ components:
           nullable: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
         discountPercent:
           type: number
@@ -13252,14 +13321,10 @@ components:
           exclusiveMinimum: true
           readOnly: true
         priceSavePercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         vatPercent:
-          oneOf:
-          - type: number
-            format: double
-          - type: integer
+          type: string
           readOnly: true
         vatValue:
           type: number
@@ -13281,21 +13346,19 @@ components:
           type: string
           readOnly: true
         reviewAverage:
-          type: number
-          format: double
+          type: string
           readOnly: true
         approvedReviewAverage:
-          type: number
-          format: double
+          type: string
           readOnly: true
         reviewCount:
-          type: integer
+          type: string
           readOnly: true
         approvedReviewCount:
-          type: integer
+          type: string
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         absoluteUrl:
           type: string
@@ -13336,11 +13399,7 @@ components:
           maxLength: 255
           pattern: ^[-a-zA-Z0-9_]+$
         children:
-          oneOf:
-          - type: object
-            additionalProperties: {}
-          - type: array
-            items: {}
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -13353,15 +13412,12 @@ components:
           readOnly: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
         createdAt:
           type: string
@@ -13388,7 +13444,7 @@ components:
           type: string
           readOnly: true
         recursiveProductCount:
-          type: integer
+          type: string
           readOnly: true
     PatchedProductFavourite:
       type: object
@@ -13520,7 +13576,7 @@ components:
           readOnly: true
           nullable: true
         isVisible:
-          type: boolean
+          type: string
           readOnly: true
         uuid:
           type: string
@@ -13838,7 +13894,6 @@ components:
           type: string
         notes:
           type: string
-          nullable: true
           maxLength: 255
         isMain:
           type: boolean
@@ -13872,10 +13927,8 @@ components:
         value:
           type: number
           format: double
-          maximum: 10000000000
-          minimum: -10000000000
-          exclusiveMaximum: true
-          exclusiveMinimum: true
+          maximum: 100.0
+          minimum: 0.0
         createdAt:
           type: string
           format: date-time
@@ -14036,15 +14089,12 @@ components:
           nullable: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
         discountPercent:
           type: number
@@ -14074,14 +14124,10 @@ components:
           exclusiveMinimum: true
           readOnly: true
         priceSavePercent:
-          type: number
-          format: double
+          type: string
           readOnly: true
         vatPercent:
-          oneOf:
-          - type: number
-            format: double
-          - type: integer
+          type: string
           readOnly: true
         vatValue:
           type: number
@@ -14103,21 +14149,19 @@ components:
           type: string
           readOnly: true
         reviewAverage:
-          type: number
-          format: double
+          type: string
           readOnly: true
         approvedReviewAverage:
-          type: number
-          format: double
+          type: string
           readOnly: true
         reviewCount:
-          type: integer
+          type: string
           readOnly: true
         approvedReviewCount:
-          type: integer
+          type: string
           readOnly: true
         likesCount:
-          type: integer
+          type: string
           readOnly: true
         absoluteUrl:
           type: string
@@ -14180,11 +14224,7 @@ components:
           maxLength: 255
           pattern: ^[-a-zA-Z0-9_]+$
         children:
-          oneOf:
-          - type: object
-            additionalProperties: {}
-          - type: array
-            items: {}
+          type: string
           readOnly: true
         parent:
           type: integer
@@ -14197,15 +14237,12 @@ components:
           readOnly: true
         seoTitle:
           type: string
-          nullable: true
           maxLength: 70
         seoDescription:
           type: string
-          nullable: true
           maxLength: 300
         seoKeywords:
           type: string
-          nullable: true
           maxLength: 255
         createdAt:
           type: string
@@ -14232,7 +14269,7 @@ components:
           type: string
           readOnly: true
         recursiveProductCount:
-          type: integer
+          type: string
           readOnly: true
       required:
       - absoluteUrl
@@ -14344,6 +14381,58 @@ components:
       - translations
       - updatedAt
       - uuid
+    ProductMeiliSearchResponse:
+      type: object
+      properties:
+        limit:
+          type: integer
+        offset:
+          type: integer
+        estimatedTotalHits:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductMeiliSearchResult'
+      required:
+      - estimatedTotalHits
+      - limit
+      - offset
+      - results
+    ProductMeiliSearchResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        languageCode:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        master:
+          type: integer
+        absoluteUrl:
+          type: string
+        mainImagePath:
+          type: string
+        matchesPosition: {}
+        rankingScore:
+          type: number
+          format: double
+          nullable: true
+        formatted: {}
+      required:
+      - absoluteUrl
+      - description
+      - formatted
+      - id
+      - languageCode
+      - mainImagePath
+      - master
+      - matchesPosition
+      - name
+      - rankingScore
     ProductReview:
       type: object
       description: Serializer that saves :class:`TranslatedFieldsField` automatically.
@@ -14396,7 +14485,7 @@ components:
           readOnly: true
           nullable: true
         isVisible:
-          type: boolean
+          type: string
           readOnly: true
         uuid:
           type: string
@@ -14854,7 +14943,6 @@ components:
           type: string
         notes:
           type: string
-          nullable: true
           maxLength: 255
         isMain:
           type: boolean
@@ -14912,10 +15000,8 @@ components:
         value:
           type: number
           format: double
-          maximum: 10000000000
-          minimum: -10000000000
-          exclusiveMaximum: true
-          exclusiveMinimum: true
+          maximum: 100.0
+          minimum: 0.0
         createdAt:
           type: string
           format: date-time

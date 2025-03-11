@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-from typing import override
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.http import HttpRequest
 
 if TYPE_CHECKING:  # pragma: no cover
-    from allauth.socialaccount.models import SocialLogin  # isort:skip
-    from allauth.socialaccount.models import SocialAccount  # isort:skip
+    from allauth.socialaccount.models import SocialAccount, SocialLogin
 
 User = get_user_model()
 
@@ -44,6 +41,6 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
             sociallogin.connect(request, user)
 
     @override
-    def get_connect_redirect_url(self, request: HttpRequest, social_account: SocialAccount) -> str:
+    def get_connect_redirect_url(self, request, social_account: SocialAccount):
         url = request.POST.get("next") or request.GET.get("next")
         return url if url else f"{settings.NUXT_BASE_URL}/account"

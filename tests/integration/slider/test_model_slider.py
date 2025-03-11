@@ -7,7 +7,9 @@ from django.test import TestCase
 from slider.factories import SliderFactory
 from slider.models import Slider
 
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 
 
@@ -20,12 +22,6 @@ class SliderModelTestCase(TestCase):
     def test_fields(self):
         self.assertTrue(default_storage.exists(self.slider.image.path))
 
-    def test_unicode_representation(self):
-        self.assertEqual(
-            self.slider.__unicode__(),
-            self.slider.safe_translation_getter("name"),
-        )
-
     def test_str_representation(self):
         self.assertEqual(
             str(self.slider),
@@ -37,9 +33,7 @@ class SliderModelTestCase(TestCase):
         self.assertTrue(default_storage.exists(self.slider.image.path))
 
     def test_main_image_path(self):
-        expected_filename = f"media/uploads/sliders/{os.path.basename(self.slider.image.name)}"
+        expected_filename = (
+            f"media/uploads/sliders/{os.path.basename(self.slider.image.name)}"
+        )
         self.assertEqual(self.slider.main_image_path, expected_filename)
-
-    def tearDown(self) -> None:
-        Slider.objects.all().delete()
-        super().tearDown()

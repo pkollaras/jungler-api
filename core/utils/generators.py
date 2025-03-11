@@ -1,8 +1,7 @@
 import random
 import string
-from dataclasses import dataclass
-from dataclasses import field
-from typing import Callable
+from collections.abc import Callable
+from dataclasses import dataclass, field
 
 from django.core.exceptions import ValidationError
 from django.db.models import Model
@@ -24,12 +23,12 @@ class SlugifyConfig:
             self.random_string_generator = self.default_random_string_generator
 
     @staticmethod
-    def default_random_string_generator(size=5) -> str:
+    def default_random_string_generator(size=5):
         chars = string.ascii_lowercase + string.digits
         return "".join(random.choices(chars, k=size))
 
 
-def unique_slugify(config: SlugifyConfig) -> str:
+def unique_slugify(config: SlugifyConfig):
     base_slug = slugify(getattr(config.instance, config.title_field, ""))
     if base_slug == config.invalid_slug or not base_slug:
         base_slug = f"{config.invalid_slug}-{config.random_string_generator(config.size)}"
@@ -41,7 +40,9 @@ def unique_slugify(config: SlugifyConfig) -> str:
     while attempt < config.max_attempts:
         lookup = {f"{config.slug_field}__iexact": slug}
         if not ModelClass.objects.filter(**lookup).exists():
-            setattr(config.instance, config.slug_field, slug)  # Set slug on instance
+            setattr(
+                config.instance, config.slug_field, slug
+            )  # Set slug on instance
             return slug  # Unique slug found
 
         slug = f"{base_slug}-{config.random_string_generator(config.size)}"

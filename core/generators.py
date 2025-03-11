@@ -106,7 +106,7 @@ class UserNameGenerator:
     ]
 
     @staticmethod
-    def generate_hash(email: str) -> str:
+    def generate_hash(email: str):
         email_bytes = email.encode("utf-8")
         hash_obj = hashlib.shake_256(email_bytes)
         return hash_obj.hexdigest(4)
@@ -116,15 +116,24 @@ class UserNameGenerator:
         email: str,
         max_length: int = settings.ACCOUNT_USERNAME_MAX_LENGTH,
         max_attempts: int = 1000,
-    ) -> str:
-        user_account_model = importlib.import_module("user.models.account").UserAccount
+    ):
+        user_account_model = importlib.import_module(
+            "user.models.account"
+        ).UserAccount
 
-        for attempt in range(max_attempts):
+        for _attempt in range(max_attempts):
             adjective = random.choice(UserNameGenerator.ADJECTIVES)
             noun = random.choice(UserNameGenerator.NOUNS)
             email_hash = UserNameGenerator.generate_hash(email)
             prefix = f"{adjective}{noun}"
             username = f"{prefix}#{email_hash}"
-            if len(username) <= max_length and not user_account_model.objects.filter(username=username).exists():
+            if (
+                len(username) <= max_length
+                and not user_account_model.objects.filter(
+                    username=username
+                ).exists()
+            ):
                 return username
-        raise RuntimeError("Failed to generate a unique username within the maximum attempts.")
+        raise RuntimeError(
+            "Failed to generate a unique username within the maximum attempts."
+        )

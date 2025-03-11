@@ -15,7 +15,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="blogcomment",
             name="likes",
-            field=models.ManyToManyField(blank=True, related_name="liked_blog_comments", to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="liked_blog_comments",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
             model_name="blogcomment",
@@ -43,7 +47,10 @@ class Migration(migrations.Migration):
             model_name="blogpost",
             name="author",
             field=models.ForeignKey(
-                null=True, on_delete=django.db.models.deletion.SET_NULL, related_name="blog_posts", to="blog.blogauthor"
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="blog_posts",
+                to="blog.blogauthor",
             ),
         ),
         migrations.AlterField(
@@ -59,6 +66,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="blogpost",
             name="tags",
-            field=models.ManyToManyField(blank=True, related_name="blog_posts", to="blog.blogtag"),
+            field=models.ManyToManyField(
+                blank=True, related_name="blog_posts", to="blog.blogtag"
+            ),
         ),
     ]

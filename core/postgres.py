@@ -1,12 +1,12 @@
-from typing import Optional
-from typing import override
-from typing import Union
+from typing import Optional, Union, override
 
 from django.conf import settings
-from django.contrib.postgres.search import CombinedSearchVector
-from django.contrib.postgres.search import SearchVector
-from django.contrib.postgres.search import SearchVectorCombinable
-from django.contrib.postgres.search import SearchVectorField
+from django.contrib.postgres.search import (
+    CombinedSearchVector,
+    SearchVector,
+    SearchVectorCombinable,
+    SearchVectorField,
+)
 from django.db.models import Expression
 
 from core.logging import LogInfo
@@ -17,19 +17,28 @@ class NoValidationSearchVectorCombinable(SearchVectorCombinable):
     def _combine(self, other, connector, reversed):
         if not isinstance(other, NoValidationSearchVectorCombinable):
             raise TypeError(
-                "SearchVector can only be combined with other SearchVector " f"instances, got {type(other).__name__}."
+                "SearchVector can only be combined with other SearchVector "
+                f"instances, got {type(other).__name__}."
             )
         if reversed:
-            return NoValidationCombinedSearchVector(other, connector, self, self.config)  # type: ignore[arg-type, attr-defined] # mixin class # noqa: E501
-        return NoValidationCombinedSearchVector(self, connector, other, self.config)  # type: ignore[arg-type, attr-defined] # mixin class # noqa: E501
+            return NoValidationCombinedSearchVector(
+                other, connector, self, self.config
+            )  # type: ignore[arg-type, attr-defined] # mixin class
+        return NoValidationCombinedSearchVector(
+            self, connector, other, self.config
+        )  # type: ignore[arg-type, attr-defined] # mixin class
 
 
-class NoValidationCombinedSearchVector(NoValidationSearchVectorCombinable, CombinedSearchVector):
+class NoValidationCombinedSearchVector(
+    NoValidationSearchVectorCombinable, CombinedSearchVector
+):
     contains_aggregate = False
     contains_over_clause = False
 
 
-class NoValidationSearchVector(SearchVector, NoValidationSearchVectorCombinable):
+class NoValidationSearchVector(
+    SearchVector, NoValidationSearchVectorCombinable
+):
     """The purpose of this class is to omit Django's SQL compiler's validation.
 
     This validation can lead to RecursionError while processing a large number of
@@ -71,7 +80,10 @@ class FlatConcat(Expression):
 
     def __init__(self, *expressions, output_field=None):
         super().__init__(output_field=output_field)
-        if self.max_expression_count is not None and len(expressions) > self.max_expression_count:
+        if (
+            self.max_expression_count is not None
+            and len(expressions) > self.max_expression_count
+        ):
             if self.silent_drop_expression:
                 LogInfo.warning(
                     "Maximum expression count exceed (%d out of %d)",
@@ -81,7 +93,7 @@ class FlatConcat(Expression):
                 expressions = expressions[: self.max_expression_count]
             else:
                 raise ValueError("Maximum expression count exceeded")
-        self.source_expressions: list[SearchVector] = self._parse_expressions(  # type: ignore[attr-defined] # private method of BaseExpression # noqa: E501
+        self.source_expressions: list[SearchVector] = self._parse_expressions(  # type: ignore[attr-defined] # private method of BaseExpression
             *expressions
         )
 
@@ -91,7 +103,10 @@ class FlatConcat(Expression):
 
     def __add__(self, other):
         if not isinstance(other, FlatConcat):
-            raise TypeError(f"Cannot combine FlatSearchVectorCombinable with other " f"instances types, got {other!r}.")
+            raise TypeError(
+                f"Cannot combine FlatSearchVectorCombinable with other "
+                f"instances types, got {other!r}."
+            )
         return FlatConcat(*self.source_expressions + other.source_expressions)
 
     @override
@@ -120,7 +135,9 @@ class FlatConcat(Expression):
         c = self.copy()
         c.is_summary = summarize
         for pos, arg in enumerate(c.source_expressions):
-            c.source_expressions[pos] = arg.resolve_expression(query, allow_joins, reuse, summarize, for_save)
+            c.source_expressions[pos] = arg.resolve_expression(
+                query, allow_joins, reuse, summarize, for_save
+            )
         return c
 
     @override

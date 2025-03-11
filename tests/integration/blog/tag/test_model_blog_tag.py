@@ -5,7 +5,9 @@ from blog.factories.post import BlogPostFactory
 from blog.factories.tag import BlogTagFactory
 from blog.models.tag import BlogTag
 
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 
 
@@ -19,15 +21,11 @@ class BlogTagModelTestCase(TestCase):
     def test_fields(self):
         self.assertTrue(self.tag.active)
 
-    def test_unicode_representation(self):
-        tag_name = self.tag.safe_translation_getter("name", any_language=True) or "Unnamed Tag"
-        self.assertEqual(
-            self.tag.__unicode__(),
-            f"{tag_name} ({'Active' if self.tag.active else 'Inactive'})",
-        )
-
     def test_str_representation(self):
-        tag_name = self.tag.safe_translation_getter("name", any_language=True) or "Unnamed Tag"
+        tag_name = (
+            self.tag.safe_translation_getter("name", any_language=True)
+            or "Unnamed Tag"
+        )
         self.assertEqual(
             str(self.tag),
             f"{tag_name} ({'Active' if self.tag.active else 'Inactive'})",
@@ -58,7 +56,3 @@ class BlogTagModelTestCase(TestCase):
         )
         post.tags.set([self.tag])
         self.assertEqual(self.tag.get_posts_count, 1)
-
-    def tearDown(self) -> None:
-        BlogTag.objects.all().delete()
-        super().tearDown()

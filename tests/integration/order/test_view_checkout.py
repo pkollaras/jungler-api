@@ -13,8 +13,7 @@ from product.factories.product import ProductFactory
 from product.models.product import Product
 from region.factories import RegionFactory
 from region.models import Region
-from user.enum.address import FloorChoicesEnum
-from user.enum.address import LocationChoicesEnum
+from user.enum.address import FloorChoicesEnum, LocationChoicesEnum
 from user.factories.account import UserAccountFactory
 
 User = get_user_model()
@@ -115,12 +114,3 @@ class CheckoutViewAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Product.objects.get(pk=product_3.id).stock, 10)
         self.assertEqual(Product.objects.get(pk=product_4.id).stock, 15)
-
-    def tearDown(self) -> None:
-        Order.objects.all().delete()
-        PayWay.objects.all().delete()
-        Product.objects.all().delete()
-        User.objects.all().delete()
-        Country.objects.all().delete()
-        Region.objects.all().delete()
-        super().tearDown()

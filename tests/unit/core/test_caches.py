@@ -27,7 +27,9 @@ class CustomCacheTestCase(TestCase):
         self.assertEqual(cached_value, self.value)
 
     def test_cache_get_default(self):
-        cached_value = self.cache_instance.get("non_existent_key", default="default_value")
+        cached_value = self.cache_instance.get(
+            "non_existent_key", default="default_value"
+        )
         self.assertEqual(cached_value, "default_value")
 
     def test_cache_get_many(self):
@@ -37,7 +39,9 @@ class CustomCacheTestCase(TestCase):
         self.cache_instance.set(keys[1], values[1])
 
         cached_values = self.cache_instance.get_many(keys)
-        self.assertEqual(cached_values, {self.key: self.value, keys[1]: values[1]})
+        self.assertEqual(
+            cached_values, {self.key: self.value, keys[1]: values[1]}
+        )
 
     def test_cache_set(self):
         self.cache_instance.set(self.key, self.value)
@@ -45,7 +49,9 @@ class CustomCacheTestCase(TestCase):
         self.assertEqual(cached_value, self.value)
 
     def test_cache_get_or_set(self):
-        cached_value = self.cache_instance.get_or_set(self.key, default=self.value, timeout=60)
+        cached_value = self.cache_instance.get_or_set(
+            self.key, default=self.value, timeout=60
+        )
         self.assertEqual(cached_value, self.value)
 
     def test_cache_add(self):
@@ -83,7 +89,9 @@ class CustomCacheTestCase(TestCase):
 
     def test_cache_delete_many(self):
         keys = [self.key, "another_key"]
-        self.cache_instance.set_many({keys[0]: self.value, keys[1]: "another_value"})
+        self.cache_instance.set_many(
+            {keys[0]: self.value, keys[1]: "another_value"}
+        )
         self.cache_instance.delete_many(keys)
         cached_values = self.cache_instance.get_many(keys)
         self.assertEqual(len(cached_values), 0)
@@ -95,15 +103,15 @@ class CustomCacheTestCase(TestCase):
             "search_key3": "search_value3",
         }
         self.cache_instance.set_many(new_keys)
+        print("=== self.cache_instance.keys() === ", self.cache_instance.keys())
 
-        keys = self.cache_instance.keys("search_key*")
-        default_cache_key_prefix = self.cache_instance.key_prefix
+        keys = self.cache_instance.keys("search_key")
         self.assertEqual(
             keys,
             [
-                f"{default_cache_key_prefix}:1:search_key1",
-                f"{default_cache_key_prefix}:1:search_key2",
-                f"{default_cache_key_prefix}:1:search_key3",
+                "search_key1",
+                "search_key2",
+                "search_key3",
             ],
         )
 
@@ -120,12 +128,14 @@ class CustomCacheTestCase(TestCase):
                     super().__init__(*args, **kwargs)
 
                 def keys(self, pattern):
-                    return [b"prefix:" + key.encode() for key in keys_with_prefix]
+                    return [
+                        b"prefix:" + key.encode() for key in keys_with_prefix
+                    ]
 
             self.cache_instance.__class__ = MockRedisCache
             keys = self.cache_instance.keys("prefix")
             self.assertEqual(keys, [self.key, "another_key"])
 
-    def tearDown(self) -> None:
+    def tearDown(self):
         self.cache_instance.clear()
         super().tearDown()

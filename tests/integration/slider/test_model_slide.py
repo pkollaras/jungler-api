@@ -7,12 +7,12 @@ from django.test import TestCase
 from django.utils.timezone import now
 from djmoney.money import Money
 
-from slider.factories import SlideFactory
-from slider.factories import SliderFactory
-from slider.models import Slide
-from slider.models import Slider
+from slider.factories import SlideFactory, SliderFactory
+from slider.models import Slide, Slider
 
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 
 
@@ -32,15 +32,11 @@ class SlideModelTestCase(TestCase):
         )
 
     def test_fields(self):
-        self.assertEqual(self.slide.discount, Money("0.0", settings.DEFAULT_CURRENCY))
+        self.assertEqual(
+            self.slide.discount, Money("0.0", settings.DEFAULT_CURRENCY)
+        )
         self.assertTrue(self.slide.show_button)
         self.assertTrue(default_storage.exists(self.slide.image.path))
-
-    def test_unicode_representation(self):
-        self.assertEqual(
-            self.slide.__unicode__(),
-            f"{self.slide.safe_translation_getter('title', any_language=True)} in {self.slider}",
-        )
 
     def test_str_representation(self):
         self.assertEqual(
@@ -53,10 +49,7 @@ class SlideModelTestCase(TestCase):
         self.assertTrue(default_storage.exists(self.slide.image.path))
 
     def test_main_image_path(self):
-        expected_filename = f"media/uploads/slides/{os.path.basename(self.slide.image.name)}"
+        expected_filename = (
+            f"media/uploads/slides/{os.path.basename(self.slide.image.name)}"
+        )
         self.assertEqual(self.slide.main_image_path, expected_filename)
-
-    def tearDown(self) -> None:
-        Slide.objects.all().delete()
-        Slider.objects.all().delete()
-        super().tearDown()

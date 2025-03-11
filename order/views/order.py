@@ -12,9 +12,11 @@ from core.api.views import BaseModelViewSet
 from core.filters.custom_filters import PascalSnakeCaseOrderingFilter
 from core.utils.serializers import MultiSerializerMixin
 from order.models.order import Order
-from order.serializers.order import CheckoutSerializer
-from order.serializers.order import OrderCreateUpdateSerializer
-from order.serializers.order import OrderSerializer
+from order.serializers.order import (
+    CheckoutSerializer,
+    OrderCreateUpdateSerializer,
+    OrderSerializer,
+)
 
 User = get_user_model()
 
@@ -23,12 +25,15 @@ class Checkout(APIView):
     serializer_class = CheckoutSerializer
     queryset = Order.objects.all()
 
-    def create_order(self, request: Request, serializer: CheckoutSerializer) -> None:
+    @staticmethod
+    def create_order(request: Request, serializer: CheckoutSerializer):
         user = request.user if request.user.is_authenticated else None
         serializer.save(user=user)
 
-    def post(self, request, format=None):
-        serializer = CheckoutSerializer(data=request.data, context={"request": request})
+    def post(self, request):
+        serializer = CheckoutSerializer(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         self.create_order(request, serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -54,7 +59,7 @@ class OrderViewSet(MultiSerializerMixin, BaseModelViewSet):
     }
 
     @action(detail=True, methods=["GET"])
-    def retrieve_by_uuid(self, request, uuid=None, *args, **kwargs) -> Response:
+    def retrieve_by_uuid(self, request, uuid=None, *args, **kwargs):
         product = get_object_or_404(Order, uuid=uuid)
         serializer = self.get_serializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -4,30 +4,30 @@ from djmoney.contrib.django_rest_framework import MoneyField
 from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
-from cart.models import Cart
-from cart.models import CartItem
+from cart.models import Cart, CartItem
 from core.api.serializers import BaseExpandSerializer
 from product.serializers.product import ProductSerializer
 
 
 class CartItemSerializer(BaseExpandSerializer):
-    cart = serializers.SerializerMethodField("get_cart_id")
-    product = serializers.SerializerMethodField("get_product")
+    cart = serializers.SerializerMethodField()
+    product = serializers.SerializerMethodField()
     price = MoneyField(max_digits=11, decimal_places=2, read_only=True)
     final_price = MoneyField(max_digits=11, decimal_places=2, read_only=True)
     discount_value = MoneyField(max_digits=11, decimal_places=2, read_only=True)
     vat_value = MoneyField(max_digits=11, decimal_places=2, read_only=True)
     total_price = MoneyField(max_digits=11, decimal_places=2, read_only=True)
-    total_discount_value = MoneyField(max_digits=11, decimal_places=2, read_only=True)
+    total_discount_value = MoneyField(
+        max_digits=11, decimal_places=2, read_only=True
+    )
 
     @extend_schema_field(ProductSerializer)
-    def get_product(self, cart_item):
-        return ProductSerializer(cart_item.product).data
+    def get_product(self, obj):
+        return ProductSerializer(obj.product).data
 
     @extend_schema_field(serializers.IntegerField)
-    def get_cart_id(self, cart_item) -> int:
-        cart = cart_item.cart
-        return cart.id
+    def get_cart(self, obj):
+        return obj.cart.id
 
     class Meta:
         model = CartItem
@@ -66,41 +66,46 @@ class CartItemSerializer(BaseExpandSerializer):
 
 
 class CartItemCreateSerializer(BaseExpandSerializer):
-    cart = serializers.SerializerMethodField("get_cart_id")
-
-    @extend_schema_field(serializers.IntegerField)
-    def get_cart_id(self, cart_item) -> int:
-        cart = self.context.get("cart")
-        return cart.id
-
     class Meta:
         model = CartItem
-        fields = ("id", "cart", "product", "quantity")
+        fields = ("id", "product", "quantity")
+        read_only_fields = ("id",)
 
     @override
     def create(self, validated_data):
         cart = self.context.get("cart")
-        try:
-            cart_item = CartItem.objects.get(cart=cart, product=validated_data["product"])
-            cart_item.quantity += validated_data["quantity"]
+        product = validated_data.get("product")
+        quantity = validated_data.get("quantity")
+
+        if not cart:
+            raise serializers.ValidationError("Cart is not provided.")
+
+        cart_item, created = CartItem.objects.get_or_create(
+            cart=cart, product=product, defaults={"quantity": quantity}
+        )
+        if not created:
+            cart_item.quantity += quantity
             cart_item.save()
-            return cart_item
-        except CartItem.DoesNotExist:
-            cart_item = CartItem.objects.create(cart=cart, **validated_data)
-            return cart_item
+
+        return cart_item
 
 
 class CartSerializer(BaseExpandSerializer):
-    cart_items = serializers.SerializerMethodField("get_cart_items")
+    cart_items = serializers.SerializerMethodField()
     total_price = MoneyField(max_digits=11, decimal_places=2, read_only=True)
-    total_discount_value = MoneyField(max_digits=11, decimal_places=2, read_only=True)
-    total_vat_value = MoneyField(max_digits=11, decimal_places=2, read_only=True)
+    total_discount_value = MoneyField(
+        max_digits=11, decimal_places=2, read_only=True
+    )
+    total_vat_value = MoneyField(
+        max_digits=11, decimal_places=2, read_only=True
+    )
 
     @extend_schema_field(serializers.ListSerializer(child=CartItemSerializer()))
-    def get_cart_items(self, cart: Cart):
-        qs = CartItem.objects.filter(cart=cart)
-        serializer = CartItemSerializer(qs, many=True, context=self.context)
-        return serializer.data
+    def get_cart_items(self, obj):
+        cart_items = CartItem.objects.filter(cart=obj)
+        return CartItemSerializer(
+            cart_items, many=True, context=self.context
+        ).data
 
     class Meta:
         model = Cart
@@ -116,6 +121,7 @@ class CartSerializer(BaseExpandSerializer):
             "created_at",
             "updated_at",
             "uuid",
+            "last_activity",
         )
         read_only_fields = (
             "total_price",

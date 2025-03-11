@@ -8,9 +8,11 @@ class StaticStorage(S3Boto3Storage):
     location = "static"
     default_acl = "public-read"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.local_storage = storages.create_storage({"BACKEND": "compressor.storage.CompressorFileStorage"})
+    def __init__(self, **settings):
+        super().__init__(**settings)
+        self.local_storage = storages.create_storage(
+            {"BACKEND": "compressor.storage.CompressorFileStorage"}
+        )
 
     @override
     def save(self, name, content, max_length=None):

@@ -1,3 +1,5 @@
+import json
+import logging
 import os
 from typing import override
 from uuid import uuid4
@@ -5,19 +7,40 @@ from uuid import uuid4
 from allauth.headless.base.response import APIResponse
 from allauth.headless.mfa import response
 from allauth.headless.mfa.views import ManageTOTPView
-from allauth.mfa.adapter import DefaultMFAAdapter
-from allauth.mfa.adapter import get_adapter
+from allauth.mfa.adapter import DefaultMFAAdapter, get_adapter
 from allauth.mfa.totp.internal.auth import get_totp_secret
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from core.storages import TinymceS3Storage
 from core.utils.files import sanitize_filename
+
+logger = logging.getLogger(__name__)
+
+
+def robots_txt(request):
+    if settings.DEBUG:
+        lines = [
+            "User-agent: *",
+            "Disallow: /",
+        ]
+    else:
+        lines = [
+            "User-agent: *",
+            "Disallow: /admin/",
+            "Disallow: /api/",
+            "Disallow: /upload_image",
+            "Disallow: /accounts/",
+            "Disallow: /_allauth/",
+            "Disallow: /rosetta/",
+            "Disallow: /tinymce/",
+        ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
 class HomeView(View):
@@ -28,13 +51,26 @@ class HomeView(View):
 
 
 @csrf_exempt
+def csp_report(request):
+    if request.method == "POST":
+        try:
+            report = json.loads(request.body.decode("utf-8"))
+            logger.warning(f"CSP Violation: {json.dumps(report, indent=2)}")
+        except json.JSONDecodeError:
+            logger.error("Failed to decode CSP report")
+    return HttpResponse(status=204)
+
+
+@csrf_exempt
 @login_required
 def upload_image(request):
     USE_AWS = os.getenv("USE_AWS", "False") == "True"
 
     user = request.user
     if not user.is_superuser:
-        return JsonResponse({"Error Message": "You are not authorized to upload images"})
+        return JsonResponse(
+            {"Error Message": "You are not authorized to upload images"}
+        )
 
     if request.method != "POST":
         return JsonResponse({"Error Message": "Wrong request"})
@@ -43,7 +79,9 @@ def upload_image(request):
     file_name_suffix = file_obj.name.split(".")[-1].lower()
     if file_name_suffix not in ["jpg", "png", "gif", "jpeg"]:
         return JsonResponse(
-            {"Error Message": f"Wrong file suffix ({file_name_suffix}), supported are .jpg, .png, .gif, .jpeg"}
+            {
+                "Error Message": f"Wrong file suffix ({file_name_suffix}), supported are .jpg, .png, .gif, .jpeg"
+            }
         )
 
     if USE_AWS:
@@ -51,9 +89,13 @@ def upload_image(request):
         sanitized_name = sanitize_filename(file_obj.name)
         image_path = storage.save(sanitized_name, file_obj)
         image_url = storage.url(image_path)
-        return JsonResponse({"message": "Image uploaded successfully", "location": image_url})
+        return JsonResponse(
+            {"message": "Image uploaded successfully", "location": image_url}
+        )
 
-    upload_dir = os.path.normpath(os.path.join(settings.MEDIA_ROOT, "uploads/tinymce"))
+    upload_dir = os.path.normpath(
+        os.path.join(settings.MEDIA_ROOT, "uploads/tinymce")
+    )
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
 
@@ -74,7 +116,8 @@ def upload_image(request):
 
         debug = os.getenv("DEBUG", "False") == "True"
         location = (
-            f"{settings.API_BASE_URL}{settings.MEDIA_URL}uploads/tinymce/" f"{sanitized_name}"
+            f"{settings.API_BASE_URL}{settings.MEDIA_URL}uploads/tinymce/"
+            f"{sanitized_name}"
             if debug
             else f"{settings.MEDIA_URL}uploads/tinymce/{sanitized_name}"
         )
@@ -102,7 +145,7 @@ class TOTPSvgNotFoundResponse(APIResponse):
 
 class ManageTOTPSvgView(ManageTOTPView):
     @override
-    def get(self, request, *args, **kwargs) -> APIResponse:
+    def get(self, request, *args, **kwargs):
         authenticator = self._get_authenticator()
         if not authenticator:
             adapter: DefaultMFAAdapter = get_adapter()

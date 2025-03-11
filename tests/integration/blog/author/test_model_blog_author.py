@@ -6,7 +6,9 @@ from blog.factories.author import BlogAuthorFactory
 from blog.models.author import BlogAuthor
 from user.factories.account import UserAccountFactory
 
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 User = get_user_model()
 
@@ -17,21 +19,14 @@ class BlogAuthorModelTestCase(TestCase):
 
     def setUp(self):
         self.user = UserAccountFactory(num_addresses=0)
-        self.author = BlogAuthorFactory(user=self.user, website="http://example.com")
+        self.author = BlogAuthorFactory(
+            user=self.user, website="http://example.com"
+        )
 
     def test_fields(self):
         self.assertEqual(self.author.user, self.user)
         self.assertEqual(self.author.website, "http://example.com")
 
-    def test_unicode_representation(self):
-        author_name = self.user.full_name
-        self.assertEqual(self.author.__unicode__(), f"{author_name} ({self.user.email})")
-
     def test_str_representation(self):
         author_name = self.user.full_name
         self.assertEqual(str(self.author), f"{author_name} ({self.user.email})")
-
-    def tearDown(self) -> None:
-        BlogAuthor.objects.all().delete()
-        User.objects.all().delete()
-        super().tearDown()

@@ -12,8 +12,8 @@
     <meta name="keywords" content="{{ SITE_KEYWORDS }}" />
     <meta name="author" content="{{ SITE_AUTHOR }}" />
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" >
-    <style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" nonce="{{request.csp_nonce}}">
+    <style nonce="{{request.csp_nonce}}">
       .alert {
         border-radius: 0;
       }
@@ -44,12 +44,12 @@
     <title>{{ SITE_NAME }}</title>
 
     <!-- Custom Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" nonce="{{request.csp_nonce}}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js" nonce="{{request.csp_nonce}}"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" nonce="{{request.csp_nonce}}"></script>
     <![endif]-->
   </head>
   <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
@@ -77,7 +77,7 @@
       </p>
       <p class="text-sm">{% trans "© 2024" %} {{ SITE_NAME }}. {% trans "All rights reserved." %}</p>
     </div>
-    <script type="text/javascript">
+    <script type="text/javascript" nonce="{{request.csp_nonce}}">
       document.addEventListener('DOMContentLoaded', function () {
         const themeToggleText = document.querySelector('#theme-toggle-text');
         const currentTheme = localStorage.getItem('theme');

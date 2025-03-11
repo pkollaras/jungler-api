@@ -20,8 +20,9 @@ from user.factories.account import UserAccountFactory
 from vat.factories import VatFactory
 from vat.models import Vat
 
-
-languages = [lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]]
+languages = [
+    lang["code"] for lang in settings.PARLER_LANGUAGES[settings.SITE_ID]
+]
 default_language = settings.PARLER_DEFAULT_LANGUAGE_CODE
 User = get_user_model()
 
@@ -279,13 +280,3 @@ class ProductViewSetTestCase(APITestCase):
         response = self.client.delete(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def tearDown(self) -> None:
-        Product.objects.all().delete()
-        ProductCategory.objects.all().delete()
-        ProductImage.objects.all().delete()
-        ProductReview.objects.all().delete()
-        ProductFavourite.objects.all().delete()
-        Vat.objects.all().delete()
-        User.objects.all().delete()
-        super().tearDown()
